@@ -1,20 +1,32 @@
 <template>
   <div class="app-container">
-    <el-button @click="add">添加商品分类</el-button>
+    <el-button @click="add">新订单</el-button>
     <y-table :table-data="tableData" :pagination="pagination" @changePage4List="getList">
       <template>
 
-        <el-table-column prop="cnname" label="名称" />
+        <el-table-column prop="id" label="编号" />
 
-        <el-table-column prop="pid" label="上级ID" />
+        <el-table-column prop="guest" label="顾客" />
 
-        <el-table-column prop="sort" label="排序" />
+        <el-table-column prop="address" label="地址" />
 
-        <!--        <el-table-column prop="id" label="品类编码" />-->
+        <el-table-column prop="coupon" label="卡券" />
+
+        <el-table-column prop="status" label="状态" />
+
+        <el-table-column prop="message" label="留言" />
+
+        <el-table-column prop="totalAmount" label="总金额" />
+
+        <el-table-column prop="deliveryFee" label="配送费" />
+
+        <el-table-column prop="activity" label="优惠活动" />
+
+        <el-table-column prop="num" label="总数量" />
 
         <el-table-column label="操作" width="100px">
           <template slot-scope="{row}">
-            <el-button type="text" size="small" @click="edit(row.id)">修改</el-button>
+            <el-button type="text" size="small" @click="detail(row.id)">详情</el-button>
             <el-button type="text" size="small" @click="del(row.id)">删除</el-button>
           </template>
         </el-table-column>
@@ -23,7 +35,7 @@
   </div>
 </template>
 <script>
-import { getCatalogs, delCatalog } from '@/api/catalog'
+import { getOrders, delOrder } from '@/api/order'
 import yTable from '@/components/yTable'
 
 export default {
@@ -42,21 +54,19 @@ export default {
   },
   methods: {
     async getList() {
-      const response = await getCatalogs({
+      const response = await getOrders({
         page: this.pagination.pageNumber,
         pagesize: this.pagination.pageSize
       })
-      // this.tableData = response.data.list
-      // this.pagination.total = parseInt(response.data.pagination.total)
-      this.tableData = response.data
-      this.pagination.total = response.data.length
+      this.tableData = response.data.list
+      this.pagination.total = parseInt(response.data.pagination.total)
     },
 
     add() {
       this.$router.push({ path: 'add' })
     },
-    edit(id) {
-      this.$router.push({ path: 'edit', query: { id: id }})
+    detail(id) {
+      this.$router.push({ path: 'detail', query: { id: id }})
     },
     del(id) {
       this.$confirm('是否删除?', '提示', {
@@ -65,7 +75,7 @@ export default {
         type: 'warning'
       })
         .then(() => {
-          delCatalog(id).then(response => {
+          delOrder(id).then(response => {
             this.$message({
               type: 'success',
               message: '删除成功!'

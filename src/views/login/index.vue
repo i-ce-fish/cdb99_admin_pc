@@ -114,7 +114,7 @@ export default {
             // 登录成功后初始化下拉api常量selectConst
             const hasSelectApi = this.$store.state.localStorage.all
             if (!hasSelectApi) {
-              await this.$store.dispatch('localStorage/setSelectConst')
+              // await this.$store.dispatch('localStorage/setSelectConst')
             }
           }).catch(() => {
             this.loading = false

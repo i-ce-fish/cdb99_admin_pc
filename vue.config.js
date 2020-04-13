@@ -46,9 +46,11 @@ module.exports = {
       '/api': {
         // target: `http://127.0.0.1:${port}/mock`,
         // target: `http://123.207.179.135:3000`,
-        target: 'http://www.cdb99.com:3000/',
-        changeOrigin: true,
-        pathRewrite: { '^/api': '' }
+        target: 'http://www.cdb99.com:8100/',
+        // 本地mock api
+        // target: 'http://127.0.0.1:5000/',
+        changeOrigin: true
+        // pathRewrite: { '^/api': '' }
       }
     },
     after: require('./mock/mock-server.js')
@@ -114,28 +116,28 @@ module.exports = {
             .end()
           config
             .optimization.splitChunks({
-            chunks: 'all',
-            cacheGroups: {
-              libs: {
-                name: 'chunk-libs',
-                test: /[\\/]node_modules[\\/]/,
-                priority: 10,
-                chunks: 'initial' // only package third parties that are initially dependent
-              },
-              elementUI: {
-                name: 'chunk-elementUI', // split elementUI into a single package
-                priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-                test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
-              },
-              commons: {
-                name: 'chunk-commons',
-                test: resolve('src/components'), // can customize your rules
-                minChunks: 3, //  minimum common number
-                priority: 5,
-                reuseExistingChunk: true
+              chunks: 'all',
+              cacheGroups: {
+                libs: {
+                  name: 'chunk-libs',
+                  test: /[\\/]node_modules[\\/]/,
+                  priority: 10,
+                  chunks: 'initial' // only package third parties that are initially dependent
+                },
+                elementUI: {
+                  name: 'chunk-elementUI', // split elementUI into a single package
+                  priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+                  test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
+                },
+                commons: {
+                  name: 'chunk-commons',
+                  test: resolve('src/components'), // can customize your rules
+                  minChunks: 3, //  minimum common number
+                  priority: 5,
+                  reuseExistingChunk: true
+                }
               }
-            }
-          })
+            })
           config.optimization.runtimeChunk('single')
         }
       )

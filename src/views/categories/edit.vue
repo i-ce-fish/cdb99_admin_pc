@@ -4,7 +4,7 @@
       <h3>修改商品分类</h3>
       <el-form
         ref="yForm"
-        :model="catalogForm"
+        :model="categoryForm"
         label-width="100px"
       >
         <el-row>
@@ -13,7 +13,7 @@
             <el-form-item label="名称:" prop="name">
               <component
                 is="YInput"
-                v-model="catalogForm.cnname"
+                v-model="categoryForm.name"
               />
             </el-form-item>
           </el-col>
@@ -22,23 +22,16 @@
             <el-form-item label="上级ID:" prop="parent_id">
               <component
                 is="YInput"
-                v-model="catalogForm.pid"
+                v-model="categoryForm.parentId"
               />
             </el-form-item>
           </el-col>
 
-          <el-col :span="12">
-            <el-form-item label="排序:" prop="sort">
-              <component
-                is="YInput"
-                v-model="catalogForm.sort"
-              />
-            </el-form-item>
-          </el-col>
+
 
           <el-col :span="24">
             <el-form-item>
-              <el-button @click="submit('catalogForm')">确定</el-button>
+              <el-button @click="submit('categoryForm')">确定</el-button>
               <el-button @click="back">返回</el-button>
             </el-form-item>
           </el-col>
@@ -49,7 +42,7 @@
 </template>
 
 <script>
-import { getCatalog, putCatalog } from '@/api/catalog'
+import { getCategory, putCategory } from '@/api/category'
 
 import request from '../../utils/request'
 
@@ -57,7 +50,7 @@ export default {
   components: {},
   data() {
     return {
-      catalogForm: {},
+      categoryForm: {},
       //  apiList
 
       //  rules
@@ -83,7 +76,7 @@ export default {
             trigger: 'blur'
           }
         ],
-        catalog_id: [
+        category_id: [
           {
             required: true,
             message: '请选择品类',
@@ -108,18 +101,18 @@ export default {
   },
   methods: {
     async get() {
-      const response = await getCatalog(this.$route.query.id)
-      this.catalogForm = response.data
+      const response = await getCategory(this.$route.query.id)
+      this.categoryForm = response.data
     },
     //    getApiList
 
     async api() {
-      const res = await putCatalog(this.catalogForm.id, this.catalogForm)
+      const res = await putCategory(this.categoryForm.id, this.categoryForm)
       // if (res.code === '200') {
-      this.$router.push({ path: '/catalogs' })
+      this.$router.push({ path: '/categories' })
       // }
     },
-    async submit(catalogForm) {
+    async submit(categoryForm) {
       this.$refs.yForm.validate(valid => {
         if (valid) {
           this.api()

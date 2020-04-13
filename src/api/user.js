@@ -10,7 +10,7 @@ export function login(data) {
 
 export function getInfo(token) {
   return request({
-    url: 'api/userinfo',
+    url: '/api/auth/userinfo',
     method: 'get',
     params: { token }
   })
@@ -18,7 +18,7 @@ export function getInfo(token) {
 
 export function logout() {
   return request({
-    url: '/user/logout',
+    url: '/api/auth/logout',
     method: 'post'
   })
 }
@@ -60,6 +60,10 @@ export function delUser(id) {
     method: 'delete'
   })
 }
+
+
+
+//remove
 export function getRoles(params) {
   return request({
     url: '/api/',

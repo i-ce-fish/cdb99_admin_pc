@@ -32,19 +32,19 @@ const catalogsRouter = {
     path: 'index',
     name: 'catalogs',
     component: () => import('@/views/catalogs'),
-    meta: { title: '分类管理', icon: 'tree' }
+    meta: { title: '商品分类', icon: 'tree' }
   }, {
     path: 'edit',
     component: () => import('@/views/catalogs/edit'),
     hidden: true,
-    meta: { title: '修改分类' }
+    meta: { title: '修改商品分类' }
   },
-    {
-      path: 'add',
-      component: () => import('@/views/catalogs/add'),
-      hidden: true,
-      meta: { title: '添加分类' }
-    }
+  {
+    path: 'add',
+    component: () => import('@/views/catalogs/add'),
+    hidden: true,
+    meta: { title: '添加商品分类' }
+  }
   ]
 }
 

@@ -5,7 +5,11 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
-import catalogsRouter from '@/router/catalogs'
+import productsRouter from '@/router/products'
+import categoriesRouter from './categories'
+import activitiesRouter from './activities'
+import ordersRouter from './orders'
+import usersRouter from './user'
 // import inventoriesRouter from '@/router/inventories'
 // import productsRouter from '@/router/products'
 // import sales_ordersRouter from '@/router/sales_orders'
@@ -67,7 +71,12 @@ export const constantRoutes = [
       meta: { title: '首页', icon: 'dashboard' }
     }]
   },
-  catalogsRouter,
+  // catalogsRouter,
+  productsRouter,
+  categoriesRouter,
+  activitiesRouter,
+  ordersRouter,
+  usersRouter,
 
   // inventoriesRouter,
   // sales_ordersRouter,

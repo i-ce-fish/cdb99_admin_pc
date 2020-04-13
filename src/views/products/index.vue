@@ -4,23 +4,23 @@
     <y-table :table-data="tableData" :pagination="pagination" @changePage4List="getList">
       <template>
 
-        <el-table-column prop="product_name" label="商品名称" />
+        <el-table-column prop="name" label="商品名称" />
 
-        <el-table-column prop="brand_id" label="品牌" />
+        <el-table-column prop="thumbnail" label="缩略图" />
 
-        <el-table-column prop="product_gender" label="商品性别" />
+        <el-table-column prop="totalSale" label="总销量" />
 
-        <el-table-column prop="catalog_id" label="品类编码" />
+        <el-table-column prop="description" label="商品描述" />
 
-        <el-table-column prop="product_year" label="商品年份" />
+        <el-table-column prop="originPrice" label="原价" />
 
-        <el-table-column prop="product_season" label="商品季" />
+        <el-table-column prop="currentPrice" label="现价" />
 
-        <el-table-column prop="fabric_id" label="面料" />
+        <el-table-column prop="inventory" label="库存" />
 
-        <el-table-column prop="old_shortno" label="原款号" />
+        <el-table-column prop="categroy" label="分类" />
 
-        <el-table-column prop="shortno" label="款式编码" />
+        <el-table-column prop="sort" label="排序" />
 
 
         <el-table-column label="操作" width="100px">
@@ -62,10 +62,10 @@ export default {
     },
 
     add() {
-      this.$router.push({ path: 'products/add' })
+      this.$router.push({ path: 'add' })
     },
     edit(id) {
-      this.$router.push({ path: 'products/edit', query: { id: id }})
+      this.$router.push({ path: 'edit', query: { id: id }})
     },
     del(id) {
       this.$confirm('是否删除?', '提示', {

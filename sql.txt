@@ -1,0 +1,38 @@
+user account:string password:string rel_store_id:string
+store cnname:string address:string owner:string owner_tel:string store_tel:string
+tips_store rel_store_id:string title:string
+tips rel_tips_store_id:string title:string content:string
+home_page rel_store_id:string title:string content:string status:string
+home_page_carousel rel_store_id:string url:string
+guest rel_store_id:string name:string tel:string wechat_id:string avatar:string rel_member_rule_id:string balance:float integral:int qrcode_url:string member_url:string
+member_rule rel_store_id:string grade:string discount_rate:string
+guest_detail rel_guest_id:string sex:string city:string birth:datetime life_stage:string
+address rel_guest_id:string area_id:string street:string recipient:string tel:string
+friend rel_guest_id:string friend_guest_id:string
+outfit_data rel_guest_id:string outfit_value_id:string
+outfit_prop property:string
+outfit_prop_value rel_outfit_prop_id:string prop_value:string
+coupon rel_guest_id:string title:string rule:string: status:string
+favorites rel_guest_id:string rel_goods_id:string
+activity name:string start_date:datetime end_date:datetime status:string description:string rule:string
+activity_goods rel_goods_id:string rel_activity_id:string
+order_ rel_guest_id:string rel_coupon_id:string rel_address_id:string total_amount:float delivery_fee:float status:string message:string
+order_item rel_order_id:string num:int rel_inventory_id:string rel_goods_activity_id:string
+evaluation rel_goods_id:string rel_order_item_id:string content:string
+inventory rel_goods_id:string remain:int rel_inventory_color_id:string rel_inventory_size_id:string rel_inventory_style_id:string price:float img:string number:string
+inventory_style rel_inventory_id:string rel_style_id:string
+style name:string
+inventory_color rel_inventory_id:string rel_color_id:string
+color name:string number:string
+inventory_size rel_inventory_id:string rel_size_id:string
+size name:string number:string
+goods rel_category_id:string rel_store_id:string old_price:float new_price:float season:string sex:string total_sale:string number:string
+category rel_parent_id:string name:string
+goods_detail rel_goods_id:string url:string
+goods_descrip rel_goods_id:string title:string content:string
+fabric name:string
+goods_fabric rel_goods_id:string rel_fabric_id:string rate:string
+goods_carousel rel_goods_id:string url:string
+group img:string status:string title:string
+group_item rel_goods_id:string rel_group_id:string
+

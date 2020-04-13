@@ -25,17 +25,18 @@ const actions = {
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
-      // login({ email: username.trim(), password: password }).then(response => {
-      //   const { data } = response
-      //   commit('SET_TOKEN', data.token)
-      //   setToken(data.token)
-      //   resolve()
-      // }).catch(error => {
-      //   reject(error)
-      // })
-      const data = { token: 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1ODU0NTg2Mjh9.3ZOW-3KsiaNSKXpP2uPUZOb08_GHZr9mrEd-FxFkQhM' }
-      commit('SET_TOKEN', data.token)
-      setToken(data.token)
+      login({ email: username.trim(), password: password }).then(response => {
+        const { data } = response
+        commit('SET_TOKEN', data.token)
+        setToken(data.token)
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+      // mock data
+      // const data = { token: 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1ODU0NTg2Mjh9.3ZOW-3KsiaNSKXpP2uPUZOb08_GHZr9mrEd-FxFkQhM' }
+      // commit('SET_TOKEN', data.token)
+      // setToken(data.token)
       resolve()
     })
   },
@@ -43,28 +44,29 @@ const actions = {
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      // getInfo(state.token).then(response => {
-      //   const { data } = response
-      //
-      //   if (!data) {
-      //     // if (data.code === 5000) {
-      //     reject('Verification failed, please Login again.')
-      //   }
-      //
-      //   const { name, avatar } = data
-      //
-      //   commit('SET_NAME', name)
-      //   commit('SET_AVATAR', avatar)
-      //   resolve(data)
-      // }).catch(error => {
-      //   reject(error)
-      // })
+      getInfo(state.token).then(response => {
+        const { data } = response
 
-      const data = { name: 'testName', avatar: 'testAvatar' }
-      const { name, avatar } = data
-      commit('SET_NAME', name)
-      commit('SET_AVATAR', avatar)
-      resolve(data)
+        if (!data) {
+          // if (data.code === 5000) {
+          reject('Verification failed, please Login again.')
+        }
+
+        const { name, avatar } = data
+
+        commit('SET_NAME', name)
+        commit('SET_AVATAR', avatar)
+        resolve(data)
+      }).catch(error => {
+        reject(error)
+      })
+
+      // mock data
+      // const data = { name: 'testName', avatar: 'testAvatar' }
+      // const { name, avatar } = data
+      // commit('SET_NAME', name)
+      // commit('SET_AVATAR', avatar)
+      // resolve(data)
     })
   },
 

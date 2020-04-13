@@ -4,11 +4,10 @@
     <y-table :table-data="tableData" :pagination="pagination" @changePage4List="getList">
       <template>
 
-        <el-table-column prop="cnname" label="名称" />
+        <el-table-column prop="id" label="id" />
+        <el-table-column prop="name" label="名称" />
 
-        <el-table-column prop="pid" label="上级ID" />
-
-        <el-table-column prop="sort" label="排序" />
+        <el-table-column prop="parentId" label="上级ID" />
 
         <!--        <el-table-column prop="id" label="品类编码" />-->
 
@@ -23,7 +22,7 @@
   </div>
 </template>
 <script>
-import { getCatalogs, delCatalog } from '@/api/catalog'
+import { getCategories, delCategory } from '@/api/category'
 import yTable from '@/components/yTable'
 
 export default {
@@ -42,13 +41,13 @@ export default {
   },
   methods: {
     async getList() {
-      const response = await getCatalogs({
+      const response = await getCategories({
         page: this.pagination.pageNumber,
         pagesize: this.pagination.pageSize
       })
       // this.tableData = response.data.list
       // this.pagination.total = parseInt(response.data.pagination.total)
-      this.tableData = response.data
+      this.tableData = response.data.list
       this.pagination.total = response.data.length
     },
 
@@ -65,7 +64,7 @@ export default {
         type: 'warning'
       })
         .then(() => {
-          delCatalog(id).then(response => {
+          delCategory(id).then(response => {
             this.$message({
               type: 'success',
               message: '删除成功!'

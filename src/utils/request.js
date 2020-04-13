@@ -32,8 +32,8 @@ function ajaxAfter() {
 
 // create an axios instance
 const service = axios.create({
-  // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  baseURL: '',
+  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  // baseURL: '',
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })
@@ -76,34 +76,31 @@ service.interceptors.response.use(
     const res = response.data
     console.warn('返回数据', res)
     // if the custom code is not 20000, it is judged as an error.
+    if (res.code !== 200) {
+      Message({
+        message: res.message || 'Error',
+        type: 'error',
+        duration: 3 * 1000
+      })
+      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
+      if (res.code === 401 || res.code === 5000) {
+        const map = new Map([[401, '没有授权'], [5000, '登录已过期']])
+        // to re-login
+        MessageBox.confirm(map.get(res.code), '前往登录', {
+          confirmButtonText: 'Re-Login',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }).then(() => {
+          store.dispatch('user/resetToken').then(() => {
+            location.reload()
+          })
+        })
+      }
 
-    return { data: res }
-
-    // if (res.code !== 200) {
-    //   Message({
-    //     message: res.message || 'Error',
-    //     type: 'error',
-    //     duration: 3 * 1000
-    //   })
-    //   // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-    //   if (res.code === 401 || res.code === 5000) {
-    //     const map = new Map([[401, '没有授权'], [5000, '登录已过期']])
-    //     // to re-login
-    //     MessageBox.confirm(map.get(res.code), '前往登录', {
-    //       confirmButtonText: 'Re-Login',
-    //       cancelButtonText: 'Cancel',
-    //       type: 'warning'
-    //     }).then(() => {
-    //       store.dispatch('user/resetToken').then(() => {
-    //         location.reload()
-    //       })
-    //     })
-    //   }
-    //
-    //   return Promise.reject(new Error(res.message || 'Error '))
-    // } else {
-    //   return res
-    // }
+      return Promise.reject(new Error(res.message || 'Error '))
+    } else {
+      return res
+    }
   },
   error => {
     ajaxAfter()
@@ -120,7 +117,7 @@ service.interceptors.response.use(
 async function http(params = {}) {
   ajaxBefore()
   const data = await service(params)
-  numberToString(data)
+  // numberToString(data)
   ajaxAfter()
   return data
 }

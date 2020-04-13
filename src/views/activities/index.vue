@@ -4,11 +4,14 @@
     <y-table :table-data="tableData" :pagination="pagination" @changePage4List="getList">
       <template>
 
-        <el-table-column prop="cnname" label="名称" />
+        <el-table-column prop="name" label="名称" />
 
-        <el-table-column prop="pid" label="上级ID" />
+        <el-table-column prop="startDate" label="开始日期" />
 
-        <el-table-column prop="sort" label="排序" />
+        <el-table-column prop="endDate" label="结束日期" />
+        <el-table-column prop="rule" label="优惠规则" />
+        <el-table-column prop="status" label="状态" />
+        <el-table-column prop="description" label="描述" />
 
         <!--        <el-table-column prop="id" label="品类编码" />-->
 
@@ -23,8 +26,8 @@
   </div>
 </template>
 <script>
-import { getCatalogs, delCatalog } from '@/api/catalog'
 import yTable from '@/components/yTable'
+import { getActivities, delActivity } from '../../api/activity'
 
 export default {
   components: { yTable },
@@ -42,13 +45,13 @@ export default {
   },
   methods: {
     async getList() {
-      const response = await getCatalogs({
+      const response = await getActivities({
         page: this.pagination.pageNumber,
         pagesize: this.pagination.pageSize
       })
       // this.tableData = response.data.list
       // this.pagination.total = parseInt(response.data.pagination.total)
-      this.tableData = response.data
+      this.tableData = response.data.list
       this.pagination.total = response.data.length
     },
 
@@ -65,7 +68,7 @@ export default {
         type: 'warning'
       })
         .then(() => {
-          delCatalog(id).then(response => {
+          delActivity(id).then(response => {
             this.$message({
               type: 'success',
               message: '删除成功!'

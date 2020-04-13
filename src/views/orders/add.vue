@@ -1,10 +1,10 @@
 <template>
   <div class="card-container">
     <el-card class="box-card">
-      <h3>新产品信息</h3>
+      <h3>新订单</h3>
       <el-form
-        ref="productForm"
-        :model="productForm"
+        ref="orderForm"
+        :model="orderForm"
         :rules="rules"
         label-width="100px"
       >
@@ -12,71 +12,95 @@
         <el-row>
 
           <el-col :span="12">
-            <el-form-item label="商品名称:" prop="name">
+            <el-form-item label="顾客:" prop="guest">
               <component
                 is="YInput"
-                v-model="productForm.name"
+                v-model="orderForm.guest"
               />
             </el-form-item>
           </el-col>
 
           <el-col :span="12">
-            <el-form-item label="缩略图" prop="thumbnail">
+            <el-form-item label="地址" prop="address">
               <component
                 is="YInput"
-                v-model="productForm.thumbnail"
+                v-model="orderForm.address"
               />
             </el-form-item>
           </el-col>
 
           <el-col :span="12">
-            <el-form-item label="总销量:" prop="totalSale">
+            <el-form-item label="卡券:" prop="coupon">
               <component
                 is="YInput"
-                v-model="productForm.totalSale"
+                v-model="orderForm.coupon"
               />
             </el-form-item>
           </el-col>
 
           <el-col :span="12">
-            <el-form-item label="商品描述:" prop="description">
+            <el-form-item label="状态:" prop="status">
               <component
                 is="YInput"
-                v-model="productForm.description"
+                v-model="orderForm.status"
               />
             </el-form-item>
           </el-col>
 
           <el-col :span="12">
-            <el-form-item label="原价:" prop="originPrice">
+            <el-form-item label="留言:" prop="message">
               <component
                 is="YInput"
-                v-model="productForm.originPrice"
+                v-model="orderForm.message"
               />
             </el-form-item>
           </el-col>
 
           <el-col :span="12">
-            <el-form-item label="当前价:" prop="currentPrice">
+            <el-form-item label="总金额:" prop="totalAmount">
               <component
                 is="YInput"
-                v-model="productForm.currentPrice"
+                v-model="orderForm.totalAmount"
               />
             </el-form-item>
           </el-col>
 
           <el-col :span="12">
-            <el-form-item label="库存:" prop="inventory">
+            <el-form-item label="配送费:" prop="deliveryFee">
               <component
                 is="YInput"
-                v-model="productForm.inventory"
+                v-model="orderForm.deliveryFee"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="优惠活动:" prop="activity">
+              <component
+                is="YInput"
+                v-model="orderForm.activity"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="总数量:" prop="num">
+              <component
+                is="YInput"
+                v-model="orderForm.num"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="订单项:" prop="orderItems">
+              <component
+                is="YInput"
+                v-model="orderForm.orderItems"
               />
             </el-form-item>
           </el-col>
 
           <el-col :span="24">
             <el-form-item>
-              <el-button @click="submit('productForm')">提交</el-button>
+              <el-button @click="submit('orderForm')">提交</el-button>
               <el-button @click="back">返回</el-button>
             </el-form-item>
           </el-col>
@@ -89,21 +113,21 @@
 
 <script>
 
-import { addProduct } from '../../api/product'
+import { addOrder } from '../../api/order'
 
 export default {
 
   data() {
     return {
-      productForm: {},
+      orderForm: {},
       rules: {}
     }
   },
   methods: {
 
     async api() {
-      const res = await addProduct(this.productForm)
-      this.$router.push({ path: '/products' })
+      const res = await addOrder(this.orderForm)
+      this.$router.push({ path: '/orders' })
 
       this.$message({
         message: '添加成功',
@@ -111,8 +135,8 @@ export default {
       })
     },
 
-    async submit(productForm) {
-      this.$refs.productForm.validate(valid => {
+    async submit(orderForm) {
+      this.$refs.orderForm.validate(valid => {
         if (valid) {
           this.api()
         } else {
