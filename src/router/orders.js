@@ -9,7 +9,7 @@ const ordersRouter = {
     path: 'index',
     name: 'orders',
     component: () => import('@/views/orders'),
-    meta: { title: '订单', icon: 'tree' }
+    meta: { title: '订单管理', icon: 'tree' }
   }, {
     path: 'edit',
     component: () => import('@/views/orders/edit'),

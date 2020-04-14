@@ -10,7 +10,7 @@ const activitiesRouter = {
     path: 'index',
     name: 'activities',
     component: () => import('@/views/activities'),
-    meta: { title: '优惠活动', icon: 'tree' }
+    meta: { title: '优惠活动管理', icon: 'tree' }
   }, {
     path: 'edit',
     component: () => import('@/views/activities/edit'),

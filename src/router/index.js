@@ -10,6 +10,8 @@ import categoriesRouter from './categories'
 import activitiesRouter from './activities'
 import ordersRouter from './orders'
 import usersRouter from './user'
+import customersRouter from './customer'
+import wearsRouter from './wears'
 // import inventoriesRouter from '@/router/inventories'
 // import productsRouter from '@/router/products'
 // import sales_ordersRouter from '@/router/sales_orders'
@@ -77,7 +79,8 @@ export const constantRoutes = [
   activitiesRouter,
   ordersRouter,
   usersRouter,
-
+  customersRouter,
+  wearsRouter,
   // inventoriesRouter,
   // sales_ordersRouter,
   // {

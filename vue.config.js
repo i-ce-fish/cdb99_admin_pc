@@ -46,9 +46,9 @@ module.exports = {
       '/api': {
         // target: `http://127.0.0.1:${port}/mock`,
         // target: `http://123.207.179.135:3000`,
-        target: 'http://www.cdb99.com:8100/',
+        // target: 'http://www.cdb99.com:8100/',
         // 本地mock api
-        // target: 'http://127.0.0.1:5000/',
+        target: 'http://127.0.0.1:5000/',
         changeOrigin: true
         // pathRewrite: { '^/api': '' }
       }

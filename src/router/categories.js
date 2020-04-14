@@ -32,7 +32,7 @@ const categoriesRouter = {
     path: 'index',
     name: 'categories',
     component: () => import('@/views/categories'),
-    meta: { title: '商品分类', icon: 'tree' }
+    meta: { title: '商品分类管理', icon: 'tree' }
   }, {
     path: 'edit',
     component: () => import('@/views/categories/edit'),

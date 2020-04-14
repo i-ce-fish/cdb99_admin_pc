@@ -10,7 +10,7 @@ const productsRouter = {
     path: 'index',
     name: 'products',
     component: () => import('@/views/products'),
-    meta: { title: '商品', icon: 'tree' }
+    meta: { title: '商品管理', icon: 'tree' }
   }, {
     path: 'edit',
     component: () => import('@/views/products/edit'),

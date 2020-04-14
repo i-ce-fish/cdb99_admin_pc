@@ -10,9 +10,23 @@
         <el-table-column prop="password" label="密码"/>
 
         <el-table-column prop="roleName" label="角色"/>
-        <el-table-column prop="avatar" label="头像"/>
+
+        <el-table-column prop="memberLev" label="会员等级"/>
+
+        <el-table-column prop="integral" label="积分"/>
+
+        <el-table-column prop="balance" label="余额"/>
+
+        <el-table-column prop="wechatId" label="微信id"/>
+
         <el-table-column prop="mobile" label="手机"/>
-        <el-table-column prop="email" label="邮箱"/>
+
+        <el-table-column prop="avatar" label="头像"/>
+        <el-table-column prop="qrcodeUrl" label="二维码"/>
+        <el-table-column prop="memberUrl" label="会员码"/>
+        <el-table-column prop="city" label="城市"/>
+        <el-table-column prop="sex" label="性别"/>
+        <el-table-column prop="birth" label="生日"/>
 
 
         <el-table-column label="操作" width="100px">
@@ -26,7 +40,7 @@
   </div>
 </template>
 <script>
-  import { getUsers, delUser } from '@/api/user'
+  import { getOutfits, delOutfit } from '@/api/outfit'
   import yTable from '@/components/yTable'
 
   export default {
@@ -45,7 +59,7 @@
     },
     methods: {
       async getList() {
-        const response = await getUsers({
+        const response = await getOutfits({
           page: this.pagination.pageNumber,
           pagesize: this.pagination.pageSize
         })
@@ -66,7 +80,7 @@
           type: 'warning'
         })
           .then(() => {
-            delUser(id).then(response => {
+            delOutfit(id).then(response => {
               this.$message({
                 type: 'success',
                 message: '删除成功!'

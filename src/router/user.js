@@ -10,7 +10,7 @@ const usersRouter = {
     path: 'index',
     name: 'users',
     component: () => import('@/views/users'),
-    meta: { title: '用户', icon: 'tree' }
+    meta: { title: '用户管理', icon: 'tree' }
   }, {
     path: 'edit',
     component: () => import('@/views/users/edit'),
