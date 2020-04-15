@@ -3,7 +3,8 @@ import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 import { Loading } from 'element-ui'
-import { numberToString } from '@/utils/index'
+
+import { underlineToHump} from './index'
 
 let loading = null
 let loadTotal = 0
@@ -47,7 +48,7 @@ service.interceptors.request.use(
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
-      config.headers['Authorization'] = getToken()
+      config.headers['Authorization'] = 'Bearer ' + getToken()
       config.headers['Accept'] = 'application/json'
     }
     return config
@@ -117,9 +118,19 @@ service.interceptors.response.use(
 async function http(params = {}) {
   ajaxBefore()
   const data = await service(params)
-  // numberToString(data)
+  dataPrepared(data.data)
   ajaxAfter()
   return data
+}
+
+/**
+ * 数据预处理
+ * @param data
+ */
+export function dataPrepared(data) {
+  if (data) {
+    underlineToHump(data)
+  }
 }
 
 export default http

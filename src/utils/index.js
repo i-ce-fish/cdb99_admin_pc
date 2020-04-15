@@ -108,9 +108,6 @@ export function param2Obj(url) {
   )
 }
 
-export function dataPrepared(data) {
-}
-
 /**
  * 01与男女的转换
  * 弃用
@@ -143,16 +140,58 @@ export function changeGender(data) {
  * @param obj
  */
 export function numberToString(obj) {
-  if (obj) {
-    Object.keys(obj).forEach((item) => {
-      if (typeof obj[item] === 'number') {
-        obj[item] = obj[item].toString()
-      }
-      if (typeof obj[item] === 'object') {
-        numberToString(obj[item])
-      }
-    })
-  }
+  Object.keys(obj).forEach((item) => {
+    if (typeof obj[item] === 'number') {
+      obj[item] = obj[item].toString()
+    }
+    if (typeof obj[item] === 'object') {
+      numberToString(obj[item])
+    }
+  })
+}
+
+/**
+ * 下划线转驼峰
+ *
+ * 递归时候注意条件判断先后顺序，
+ * 此处由于删除对象时候，无法确定子孙中是否含有下划线，
+ * 所以必须从最深的一代开始删除属性
+ * 所以先递归，后判断‘_’
+ */
+export function underlineToHump(obj) {
+  Object.keys(obj).forEach((item) => {
+    if (typeof obj[item] === 'object') {
+      underlineToHump(obj[item])
+    }
+
+    if (item.match('_')) {
+      obj[toHump(item)] = obj[item]
+      delete obj[item]
+    }
+  })
+}
+
+/**
+ * 驼峰转下划线
+ */
+export function humpToUnderline(obj) {
+  Object.keys(obj).forEach((item) => {
+    if (typeof obj[item] === 'object') {
+      humpToUnderline(obj[item])
+    }
+  })
+}
+
+// 下划线转换驼峰
+export function toHump(name) {
+  return name.replace(/\_(\w)/g, function(all, letter) {
+    return letter.toUpperCase()
+  })
+}
+
+// 驼峰转换下划线
+export function toUnderLine(name) {
+  return name.replace(/([A-Z])/g, '_$1').toLowerCase()
 }
 
 /**

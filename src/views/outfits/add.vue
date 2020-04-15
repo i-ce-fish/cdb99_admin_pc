@@ -1,7 +1,7 @@
 <template>
   <div class="card-container">
     <el-card class="box-card">
-      <h3>新用户</h3>
+      <h3>新搭配</h3>
       <el-form
         ref="outfitForm"
         :model="outfitForm"
@@ -12,131 +12,32 @@
         <el-row>
 
           <el-col :span="12">
-            <el-form-item label="昵称:" prop="name">
+            <el-form-item label="标题:" prop="title">
               <component
                 is="YInput"
-                v-model="outfitForm.name"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="账号:" prop="account">
-              <component
-                is="YInput"
-                v-model="outfitForm.account"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="密码:" prop="password">
-              <component
-                is="YInput"
-                v-model="outfitForm.password"
+                v-model="outfitForm.title"
               />
             </el-form-item>
           </el-col>
 
           <el-col :span="12">
-            <el-form-item label="角色" prop="roleName">
+            <el-form-item label="主图:" prop="mainImg">
               <component
                 is="YInput"
-                v-model="outfitForm.roleName"
+                v-model="outfitForm.mainImg"
               />
             </el-form-item>
           </el-col>
 
           <el-col :span="12">
-            <el-form-item label="会员等级:" prop="memberLev">
+            <el-form-item label="商品:" prop="products">
               <component
                 is="YInput"
-                v-model="outfitForm.memberLev"
+                v-model="outfitForm.products"
               />
             </el-form-item>
           </el-col>
 
-          <el-col :span="12">
-            <el-form-item label="积分:" prop="integral">
-              <component
-                is="YInput"
-                v-model="outfitForm.integral"
-              />
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="12">
-            <el-form-item label="余额:" prop="balance">
-              <component
-                is="YInput"
-                v-model="outfitForm.balance"
-              />
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="12">
-            <el-form-item label="微信id:" prop="wechatId">
-              <component
-                is="YInput"
-                v-model="outfitForm.wechatId"
-              />
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="12">
-            <el-form-item label="手机:" prop="mobile">
-              <component
-                is="YInput"
-                v-model="outfitForm.mobile"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="头像:" prop="avatar">
-              <component
-                is="YInput"
-                v-model="outfitForm.avatar"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="二维码:" prop="qrcodeUrl">
-              <component
-                is="YInput"
-                v-model="outfitForm.qrcodeUrl"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="会员码:" prop="memberUrl">
-              <component
-                is="YInput"
-                v-model="outfitForm.memberUrl"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="城市:" prop="city">
-              <component
-                is="YInput"
-                v-model="outfitForm.city"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="性别:" prop="sex">
-              <component
-                is="YInput"
-                v-model="outfitForm.sex"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="生日:" prop="birth">
-              <component
-                is="YInput"
-                v-model="outfitForm.birth"
-              />
-            </el-form-item>
-          </el-col>
 
           <el-col :span="24">
             <el-form-item>

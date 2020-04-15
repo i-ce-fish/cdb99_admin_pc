@@ -75,8 +75,8 @@ export default {
     }
     return {
       loginForm: {
-        username: 'maxazure@gmail.com',
-        password: '11111111'
+        username: 'maxazure',
+        password: 'test'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur' }],

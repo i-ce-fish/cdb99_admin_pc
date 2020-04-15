@@ -74,16 +74,151 @@
             </el-form-item>
           </el-col>
 
+          <el-col>
+            <el-table
+              :data="tableData"
+              style="width: 100%"
+            >
+              <el-table-column type="expand">
+                <template slot-scope="props">
+                  <!--                  <el-form label-position="left" inline class="demo-table-expand">-->
+                  <!--                    <el-form-item label="商品名称">-->
+                  <!--                      <span>{{ props.row.name }}</span>-->
+                  <!--                    </el-form-item>-->
+
+                  <!--                    <el-form-item label="商品描述">-->
+                  <!--                      <span>{{ props.row.desc }}</span>-->
+                  <!--                    </el-form-item>-->
+                  <!--                  </el-form>-->
+                  <el-table
+                    :data="sizesDate"
+                    style="width: 100%"
+                  >
+                    <el-table-column
+                      label="尺码"
+                      prop="name"
+                    />
+                    <el-table-column
+                      label="库存"
+                      prop="inventory"
+                    >
+                      <template slot-scope="scope">
+                        <el-input-number v-model="num" size="small" :min="0" label="库存数量" @change="handleChange" />
+                      </template>
+
+                    </el-table-column>
+
+                    <el-table-column label="操作">
+                      <template slot-scope="scope">
+                        <el-button
+                          size="mini"
+                          type="danger"
+                          @click="onDelSize(scope.$index, scope.row)"
+                        >删除
+                        </el-button>
+                      </template>
+                    </el-table-column>
+                  </el-table>
+
+                </template>
+              </el-table-column>
+              <el-table-column
+                label="编号"
+                prop="id"
+              />
+              <el-table-column
+                label="商品颜色"
+                prop="name"
+              />
+
+              <el-table-column label="操作">
+                <template slot-scope="scope">
+                  <el-button
+                    size="mini"
+                    @click="onEditColor(scope.$index, scope.row)"
+                  >编辑颜色
+                  </el-button>
+                  <el-button
+                    size="mini"
+                    @click="onAddSize(scope.$index, scope.row)"
+                  >添加尺码
+                  </el-button>
+                  <el-button
+                    size="mini"
+                    type="danger"
+                    @click="onDelColor(scope.$index, scope.row)"
+                  >删除
+                  </el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-col>
+
           <el-col :span="24">
             <el-form-item>
               <el-button @click="submit('productForm')">提交</el-button>
               <el-button @click="back">返回</el-button>
+              <el-button @click="addColor">添加颜色</el-button>
             </el-form-item>
           </el-col>
         </el-row>
 
       </el-form>
     </el-card>
+
+    <!--    添加颜色-->
+    <el-dialog
+      title="X颜色"
+      :visible.sync="showColor"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <el-form label-position="left" inline class="demo-table-expand">
+        <el-form-item label="编号">
+          <component
+            is="YInput"
+            v-model="productForm.name"
+          />
+        </el-form-item>
+        <el-form-item label="颜色">
+          <component
+            is="YInput"
+            v-model="productForm.name"
+          />
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="showColor = false">取 消</el-button>
+        <el-button type="primary" @click="showColor = false">确 定</el-button>
+      </span>
+    </el-dialog>
+    <!--    添加尺码-->
+    <el-dialog
+      title="为X颜色添加尺码"
+      :visible.sync="showSize"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <el-form label-position="left" inline class="demo-table-expand">
+        <el-form-item label="尺码">
+          <component
+            is="YInput"
+            v-model="productForm.name"
+          />
+        </el-form-item>
+        <el-form-item label="库存">
+          <component
+            is="YInput"
+            v-model="productForm.name"
+          />
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="showSize = false">取 消</el-button>
+        <el-button type="primary" @click="showSize = false">确 定</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -96,7 +231,23 @@ export default {
   data() {
     return {
       productForm: {},
-      rules: {}
+      rules: {},
+      tableData: [{
+        id: '12987122',
+        name: '黄色'
+      }, {
+        id: '12987123',
+        name: '绿色'
+      }],
+      sizesDate: [
+        { name: 'S', inventory: '1' },
+        { name: 'M', inventory: '1' },
+        { name: 'L', inventory: '1' }
+
+      ],
+      num: 2,
+      showColor: false,
+      showSize: false
     }
   },
   methods: {
@@ -119,8 +270,28 @@ export default {
           return false
         }
       })
-    }
+    },
 
+    addColor() {
+      this.showColor=true
+      this.tableData.push({
+        id: '12987123',
+        name: '红色'
+      })
+    },
+    onAddSize() {
+      this.showSize = true
+      this.sizesDate.push({ name: 'test' })
+    },
+    onDelSize() {
+      this.sizesDate.pop()
+    },
+    onDelColor() {
+      this.tableData.pop()
+    },
+    onEditColor(obj1, obj2) {
+      this.showColor = true
+    }
   }
 
 }
@@ -134,5 +305,21 @@ export default {
     .box-card {
 
     }
+
+    .demo-table-expand {
+      font-size: 0;
+    }
+
+    .demo-table-expand label {
+      width: 90px;
+      color: #99a9bf;
+    }
+
+    .demo-table-expand .el-form-item {
+      margin-right: 0;
+      margin-bottom: 0;
+      width: 50%;
+    }
+
   }
 </style>
