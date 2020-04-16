@@ -4,7 +4,7 @@ import store from '@/store'
 import { getToken } from '@/utils/auth'
 import { Loading } from 'element-ui'
 
-import { underlineToHump} from './index'
+import { humpToUnderline, underlineToHump } from './index'
 
 let loading = null
 let loadTotal = 0
@@ -44,11 +44,14 @@ service.interceptors.request.use(
   config => {
     // do something before request is sent
     console.warn('发送请求:' + config.url, config)
+    reqPrepared(config.data)
+
     if (store.getters.token) {
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
       config.headers['Authorization'] = 'Bearer ' + getToken()
+      // config.headers['Authorization'] = getToken()
       config.headers['Accept'] = 'application/json'
     }
     return config
@@ -79,7 +82,7 @@ service.interceptors.response.use(
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 200) {
       Message({
-        message: res.message || 'Error',
+        message: `error code ${res.code}: ${res.msg}` || 'Unknow Error',
         type: 'error',
         duration: 3 * 1000
       })
@@ -98,7 +101,7 @@ service.interceptors.response.use(
         })
       }
 
-      return Promise.reject(new Error(res.message || 'Error '))
+      return Promise.reject(new Error(res.msg || 'Error '))
     } else {
       return res
     }
@@ -118,18 +121,29 @@ service.interceptors.response.use(
 async function http(params = {}) {
   ajaxBefore()
   const data = await service(params)
-  dataPrepared(data.data)
+  resPrepared(data.data)
   ajaxAfter()
   return data
 }
 
 /**
- * 数据预处理
+ * response数据预处理
  * @param data
  */
-export function dataPrepared(data) {
+export function resPrepared(data) {
   if (data) {
     underlineToHump(data)
+  }
+}
+
+/**
+ * request数据预处理
+ *
+ * @param data
+ */
+export function reqPrepared(data) {
+  if (data) {
+    humpToUnderline(data)
   }
 }
 

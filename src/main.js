@@ -68,6 +68,12 @@ Vue.prototype.back = function() {
   history.back()
 }
 
+
+//test
+Vue.prototype.test = function(e) {
+  console.log('test',e)
+}
+
 new Vue({
   el: '#app',
   router,

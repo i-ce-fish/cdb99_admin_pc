@@ -20,10 +20,10 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="账号:" prop="account">
+            <el-form-item label="账号:" prop="username">
               <component
                 is="YInput"
-                v-model="userForm.account"
+                v-model="userForm.username"
               />
             </el-form-item>
           </el-col>
@@ -48,7 +48,7 @@
             <el-form-item label="头像" prop="avatar">
               <component
                 is="YInput"
-                v-model="userForm.roleName"
+                v-model="userForm.avatar"
               />
             </el-form-item>
           </el-col>
@@ -56,7 +56,7 @@
             <el-form-item label="邮箱" prop="email">
               <component
                 is="YInput"
-                v-model="userForm.roleName"
+                v-model="userForm.email"
               />
             </el-form-item>
           </el-col>
@@ -64,7 +64,7 @@
             <el-form-item label="手机" prop="mobile">
               <component
                 is="YInput"
-                v-model="userForm.roleName"
+                v-model="userForm.mobile"
               />
             </el-form-item>
           </el-col>

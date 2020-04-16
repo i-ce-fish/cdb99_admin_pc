@@ -46,9 +46,9 @@ module.exports = {
       '/api': {
         // target: `http://127.0.0.1:${port}/mock`,
         // 远程服务器
-        // target: 'http://shop.cdb99.com:8088',
+        target: 'http://shop.cdb99.com:8088',
         // 本地python mock api
-        target: 'http://127.0.0.1:5000/',
+        // target: 'http://127.0.0.1:5000/',
         changeOrigin: true
         // pathRewrite: { '^/api': '' }
       }

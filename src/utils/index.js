@@ -164,6 +164,7 @@ export function underlineToHump(obj) {
       underlineToHump(obj[item])
     }
 
+    // todo 此处判断覆盖范围可能不足
     if (item.match('_')) {
       obj[toHump(item)] = obj[item]
       delete obj[item]
@@ -172,24 +173,29 @@ export function underlineToHump(obj) {
 }
 
 /**
- * 驼峰转下划线
+ * 驼峰转下划线递归方法
  */
 export function humpToUnderline(obj) {
   Object.keys(obj).forEach((item) => {
     if (typeof obj[item] === 'object') {
       humpToUnderline(obj[item])
     }
+
+    if (item.match(/([A-Z])/g)) {
+      obj[toUnderLine(item)] = obj[item]
+      delete obj[item]
+    }
   })
 }
 
-// 下划线转换驼峰
+// 下划线转换驼峰实现方法
 export function toHump(name) {
   return name.replace(/\_(\w)/g, function(all, letter) {
     return letter.toUpperCase()
   })
 }
 
-// 驼峰转换下划线
+// 驼峰转换下划线实现方法
 export function toUnderLine(name) {
   return name.replace(/([A-Z])/g, '_$1').toLowerCase()
 }

@@ -5,7 +5,7 @@
       <template>
         <el-table-column prop="name" label="昵称"/>
 
-        <el-table-column prop="account" label="账号"/>
+        <el-table-column prop="username" label="账号"/>
 
         <el-table-column prop="password" label="密码"/>
 

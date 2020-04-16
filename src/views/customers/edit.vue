@@ -20,10 +20,10 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="账号:" prop="account">
+            <el-form-item label="账号:" prop="username">
               <component
                 is="YInput"
-                v-model="customerForm.account"
+                v-model="customerForm.username"
               />
             </el-form-item>
           </el-col>

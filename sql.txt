@@ -1,4 +1,4 @@
-user account:string password:string rel_store_id:string
+user username:string password:string rel_store_id:string
 store cnname:string address:string owner:string owner_tel:string store_tel:string
 tips_store rel_store_id:string title:string
 tips rel_tips_store_id:string title:string content:string
