@@ -1,6 +1,13 @@
 <template>
   <div class="yTable">
-    <el-table :data="tableData" border style="width: 100%" :header-row-style="tableHeaderColor">
+    <el-table
+      :data="tableData"
+      border
+      style="width: 100%"
+      :header-row-style="tableHeaderColor"
+
+      @sort-change="changeSort"
+    >
       <slot />
     </el-table>
     <el-pagination
@@ -47,45 +54,63 @@ export default {
       if (rowIndex === 0) {
         return 'color: rgb(245, 245,245);font-weight: 300;height:20px'
       }
+    },
+    changeSort(e) {
+      // e.order 的值 null,ascending,descending
+      const map = new Map([
+        ['descending', '1'],
+        ['ascending', '0']])
+      const desc = map.get(e.order)
+      const sort = {}
+      if (desc) {
+        sort.orderby = e.prop
+        sort.desc = desc
+      }
+
+      this.$emit('sortBy', sort)
     }
   }
 }
 </script>
-<style lang='scss' >
-$border: #9bc2db;
+<style lang='scss'>
+  $border: #9bc2db;
 
-.yTable {
-  padding: 10px 0;
-  // 设置边框
-  .el-table--border:after,
-  .el-table--group:after,
-  .el-table:before {
-    background-color: $border;
-  }
-  .el-table--border,
-  .el-table--group {
-    border-color: $border;
-  }
-  .el-table {
-    font-size: 12px;
-    border-color: $border;
-
-    td {
-      padding: 0;
-      border-color: $border;
-    }
-    th {
-      padding: 4px 0;
-      border-color: $border;
-      background-color: #448cbb;
-    }
-    .el-button {
-      color: #448cbb;
-    }
-  }
-
-  .el-pagination {
+  .yTable {
     padding: 10px 0;
+    // 设置边框
+    .el-table--border:after,
+    .el-table--group:after,
+    .el-table:before {
+      background-color: $border;
+    }
+
+    .el-table--border,
+    .el-table--group {
+      border-color: $border;
+    }
+
+    .el-table {
+      font-size: 12px;
+      border-color: $border;
+
+      td {
+        padding: 0;
+        border-color: $border;
+      }
+
+      th {
+        padding: 4px 0;
+        border-color: $border;
+        background-color: #448cbb;
+      }
+
+      .el-button {
+        color: #448cbb;
+      }
+    }
+
+    .el-pagination {
+      padding: 10px 0;
+    }
   }
-}
 </style>

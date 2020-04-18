@@ -36,29 +36,49 @@
             </el-form-item>
           </el-col>
 
+<!--          <el-col :span="12">-->
+<!--            <el-form-item label="角色" prop="roleName">-->
+<!--              <component-->
+<!--                is="YInput"-->
+<!--                v-model="userForm.roleName"-->
+<!--              />-->
+<!--            </el-form-item>-->
+<!--          </el-col>-->
           <el-col :span="12">
-            <el-form-item label="角色" prop="roleName">
+            <el-form-item label="角色">
               <component
-                is="YInput"
-                v-model="userForm.roleName"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="角色id" prop="roleId">
-              <component
-                is="YInput"
+                is="YSelect"
                 v-model="userForm.roleId"
+                :options="roleOptions"
               />
+
             </el-form-item>
           </el-col>
 
           <el-col :span="12">
             <el-form-item label="头像" prop="avatar">
-              <component
-                is="YInput"
-                v-model="userForm.avatar"
-              />
+              <!--              <component-->
+              <!--                is="YRadio"-->
+              <!--                v-model="userForm.avatar"-->
+              <!--                :options="roleOptions"-->
+              <!--              />-->
+
+              <el-radio-group v-model="userForm.avatar" style="display: flex;">
+                <el-radio
+                  v-for="item of avatarOptions"
+                  :key="item.value"
+                  style="display: flex; justify-content: space-between;align-items: center"
+                  :label="item.value"
+                >
+                  <el-image
+                    style=" width: 100px; height: 100px"
+                    :src="item.url"
+                    fit="contain"
+                  />
+
+                </el-radio>
+              </el-radio-group>
+
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -99,9 +119,25 @@ export default {
 
   data() {
     return {
-      userForm: {
-      },
-      rules: {}
+      userForm: {},
+      rules: {},
+      avatarOptions: [
+        {
+          value: '0',
+          label: '男',
+          url: 'http://dingyue.ws.126.net/2020/0308/873f5f66j00q6u73h001bd200u000k0g009c0068.jpg'
+        },
+        {
+          value: '1',
+          label: '女',
+          url: 'http://dingyue.ws.126.net/2020/0308/873f5f66j00q6u73h001bd200u000k0g009c0068.jpg'
+        }],
+      roleOptions: [
+        { value: '0', label: '管理员' },
+        {
+          value: '1', label: '普通用户'
+        }
+      ]
     }
   },
   methods: {

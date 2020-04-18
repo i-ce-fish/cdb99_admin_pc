@@ -4,7 +4,7 @@ import store from '@/store'
 import { getToken } from '@/utils/auth'
 import { Loading } from 'element-ui'
 
-import { humpToUnderline, underlineToHump } from './index'
+import { humpToUnderline, toUnderLine, underlineToHump } from './index'
 
 let loading = null
 let loadTotal = 0
@@ -44,7 +44,9 @@ service.interceptors.request.use(
   config => {
     // do something before request is sent
     console.warn('发送请求:' + config.url, config)
-    reqPrepared(config.data)
+
+    // data 和 params 的驼峰都转成下划线
+    reqPrepared(config)
 
     if (store.getters.token) {
       // let each request carry token
@@ -131,6 +133,7 @@ async function http(params = {}) {
  * @param data
  */
 export function resPrepared(data) {
+
   if (data) {
     underlineToHump(data)
   }
@@ -141,9 +144,21 @@ export function resPrepared(data) {
  *
  * @param data
  */
-export function reqPrepared(data) {
-  if (data) {
-    humpToUnderline(data)
+export function reqPrepared(config) {
+  // post 的参数
+  if (config.data) {
+    humpToUnderline(config.data)
+  }
+
+  // get的参数
+  if (config.params) {
+    humpToUnderline(config.params)
+  }
+
+  // 排序时的字段
+  // orderby:'userName'
+  if (config.params && config.params.orderby) {
+    config.params.orderby = toUnderLine(config.params.orderby)
   }
 }
 

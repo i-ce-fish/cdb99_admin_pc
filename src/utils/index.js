@@ -160,7 +160,9 @@ export function numberToString(obj) {
  */
 export function underlineToHump(obj) {
   Object.keys(obj).forEach((item) => {
-    if (typeof obj[item] === 'object') {
+
+    // typeof 判断null、数组、对象类型都是object
+    if (obj[item] && typeof obj[item] === 'object') {
       underlineToHump(obj[item])
     }
 
