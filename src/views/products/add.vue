@@ -11,6 +11,12 @@
 
         <el-row>
 
+          <!--          级联 分类-->
+          <!--          <el-cascader-->
+          <!--            v-model="value"-->
+          <!--            :options="parentOptions"-->
+          <!--            :props="{ expandTrigger: 'hover' }"-->
+          <!--          />-->
           <el-col :span="12">
             <el-form-item label="商品名称:" prop="name">
               <component
@@ -248,6 +254,35 @@ export default {
       num: 2,
       showColor: false,
       showSize: false
+      // parentOptions: [
+      //   {
+      //     value: '0',
+      //     label: '裤子',
+      //     children: [
+      //       {
+      //         value: '1',
+      //         label: '牛仔裤'
+      //       }, {
+      //         value: '2',
+      //         label: '休闲裤'
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     value: '1', label: '衣服',
+      //     children: [
+      //       {
+      //         value: '1',
+      //         label: '牛仔裤'
+      //       }, {
+      //         value: '2',
+      //         label: '休闲裤'
+      //       }
+      //     ]
+      //
+      //   }
+      // ]
+
     }
   },
   methods: {
@@ -273,7 +308,7 @@ export default {
     },
 
     addColor() {
-      this.showColor=true
+      this.showColor = true
       this.tableData.push({
         id: '12987123',
         name: '红色'

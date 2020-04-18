@@ -25,7 +25,7 @@ const actions = {
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
-      // login({ email: username.trim(), password: password }).then(response => {
+      // username=>email
       login({ username: username.trim(), password: password }).then(response => {
         const { data } = response
         commit('SET_TOKEN', data.token)
@@ -38,7 +38,8 @@ const actions = {
       // const data = { token: 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1ODU0NTg2Mjh9.3ZOW-3KsiaNSKXpP2uPUZOb08_GHZr9mrEd-FxFkQhM' }
       // commit('SET_TOKEN', data.token)
       // setToken(data.token)
-      resolve()
+      // 写多了一个resolve导致还没有拿到ajax数据就执行返回了
+      // resolve()
     })
   },
 

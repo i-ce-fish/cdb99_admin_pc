@@ -5,7 +5,7 @@
       border
       style="width: 100%"
       :header-row-style="tableHeaderColor"
-
+      row-key="id"
       @sort-change="changeSort"
     >
       <slot />
@@ -25,7 +25,7 @@
 export default {
   props: {
     tableData: Array,
-    pagination: Object
+    pagination: Object,
   },
   data() {
     return {}

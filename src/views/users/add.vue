@@ -10,45 +10,47 @@
       >
 
         <el-row>
-
           <el-col :span="12">
-            <el-form-item label="昵称:" prop="name">
-              <component
-                is="YInput"
-                v-model="userForm.name"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="账号:" prop="username">
-              <component
-                is="YInput"
+            <el-form-item label="用户名:" prop="username">
+              <YInput
                 v-model="userForm.username"
               />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="密码:" prop="password">
-              <component
-                is="YInput"
-                v-model="userForm.password"
+            <el-form-item label="手机" prop="mobile">
+              <YInput
+                v-model="userForm.mobile"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="邮箱" prop="email">
+              <YInput
+                v-model="userForm.email"
               />
             </el-form-item>
           </el-col>
 
-<!--          <el-col :span="12">-->
-<!--            <el-form-item label="角色" prop="roleName">-->
-<!--              <component-->
-<!--                is="YInput"-->
-<!--                v-model="userForm.roleName"-->
-<!--              />-->
-<!--            </el-form-item>-->
-<!--          </el-col>-->
+          <el-col :span="12">
+            <el-form-item label="密码:" prop="password">
+              <YInput
+                v-model="userForm.password"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="名字:" prop="name">
+              <YInput
+                v-model="userForm.name"
+              />
+            </el-form-item>
+          </el-col>
+
           <el-col :span="12">
             <el-form-item label="角色">
-              <component
-                is="YSelect"
-                v-model="userForm.roleId"
+              <YSelect
+                v-model="userForm.role_id"
                 :options="roleOptions"
               />
 
@@ -57,11 +59,6 @@
 
           <el-col :span="12">
             <el-form-item label="头像" prop="avatar">
-              <!--              <component-->
-              <!--                is="YRadio"-->
-              <!--                v-model="userForm.avatar"-->
-              <!--                :options="roleOptions"-->
-              <!--              />-->
 
               <el-radio-group v-model="userForm.avatar" style="display: flex;">
                 <el-radio
@@ -79,22 +76,6 @@
                 </el-radio>
               </el-radio-group>
 
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="邮箱" prop="email">
-              <component
-                is="YInput"
-                v-model="userForm.email"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="手机" prop="mobile">
-              <component
-                is="YInput"
-                v-model="userForm.mobile"
-              />
             </el-form-item>
           </el-col>
 
@@ -130,7 +111,7 @@ export default {
         {
           value: '1',
           label: '女',
-          url: 'http://dingyue.ws.126.net/2020/0308/873f5f66j00q6u73h001bd200u000k0g009c0068.jpg'
+          url: 'http://pic.51yuansu.com/pic3/cover/00/82/39/58c86eac2ef89_610.jpg'
         }],
       roleOptions: [
         { value: '0', label: '管理员' },
@@ -143,7 +124,6 @@ export default {
   methods: {
 
     async api() {
-      // const res = await addUser(this.userForm)
       const res = await addUser(this.userForm)
       this.$router.push({ path: '/users' })
 

@@ -144,7 +144,8 @@ export function numberToString(obj) {
     if (typeof obj[item] === 'number') {
       obj[item] = obj[item].toString()
     }
-    if (typeof obj[item] === 'object') {
+    // typeof 判断null、数组、对象类型都是object
+    if (obj[item] && typeof obj[item] === 'object') {
       numberToString(obj[item])
     }
   })
@@ -160,7 +161,6 @@ export function numberToString(obj) {
  */
 export function underlineToHump(obj) {
   Object.keys(obj).forEach((item) => {
-
     // typeof 判断null、数组、对象类型都是object
     if (obj[item] && typeof obj[item] === 'object') {
       underlineToHump(obj[item])

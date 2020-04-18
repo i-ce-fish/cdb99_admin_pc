@@ -4,6 +4,7 @@
     placeholder="请选择"
     :disabled="disabled"
     @change="change"
+    :size="size"
   >
     <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
   </el-select>
@@ -33,7 +34,8 @@ export default {
         value: '选项5',
         label: '北京烤鸭'
       }]
-    }
+    },
+    size: { type: String, default: 'small', required: false }
   },
   data() {
     return {

@@ -12,7 +12,7 @@
         <el-row>
 
           <el-col :span="12">
-            <el-form-item label="昵称:" prop="name">
+            <el-form-item label="名字:" prop="name">
               <component
                 is="YInput"
                 v-model="customerForm.name"

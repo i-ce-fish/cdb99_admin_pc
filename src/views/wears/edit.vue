@@ -12,7 +12,7 @@
         <el-row>
 
           <el-col :span="12">
-            <el-form-item label="昵称:" prop="title">
+            <el-form-item label="名字:" prop="title">
               <component
                 is="YInput"
                 v-model="wearForm.title"
@@ -21,7 +21,7 @@
           </el-col>
 
           <el-col :span="12">
-            <el-form-item label="昵称:" prop="content">
+            <el-form-item label="名字:" prop="content">
               <component
                 is="YInput"
                 v-model="wearForm.content"
@@ -29,7 +29,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="昵称:" prop="status">
+            <el-form-item label="名字:" prop="status">
               <component
                 is="YInput"
                 v-model="wearForm.status"
@@ -37,7 +37,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="昵称:" prop="products">
+            <el-form-item label="名字:" prop="products">
               <component
                 is="YInput"
                 v-model="wearForm.products"

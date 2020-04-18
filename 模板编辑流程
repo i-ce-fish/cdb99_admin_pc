@@ -1,0 +1,15 @@
+通用的操作：
+替换所有的users、Users、user、User、用户
+1. api文件
+2. router文件
+3. view文件
+      index文件
+        设置查询条件
+        设置table column
+      add文件
+        设置formItem
+        设置校验规则
+      edit文件
+        同上
+
+

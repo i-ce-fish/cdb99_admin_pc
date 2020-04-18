@@ -124,7 +124,6 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.$store.dispatch('user/login', this.loginForm).then(async() => {
-
             this.$router.push({ path: this.redirect || '/' })
             // 登录成功后初始化下拉api常量selectConst
             const hasSelectApi = this.$store.state.localStorage.all

@@ -4,7 +4,7 @@ import store from '@/store'
 import { getToken } from '@/utils/auth'
 import { Loading } from 'element-ui'
 
-import { humpToUnderline, toUnderLine, underlineToHump } from './index'
+import { humpToUnderline, toUnderLine, underlineToHump, numberToString } from './index'
 
 let loading = null
 let loadTotal = 0
@@ -43,10 +43,10 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     // do something before request is sent
-    console.warn('发送请求:' + config.url, config)
 
     // data 和 params 的驼峰都转成下划线
-    reqPrepared(config)
+    // reqPrepared(config)
+    console.warn('发送并处理过的数据请求:' + config.url, config)
 
     if (store.getters.token) {
       // let each request carry token
@@ -80,7 +80,7 @@ service.interceptors.response.use(
   response => {
     ajaxAfter()
     const res = response.data
-    console.warn('返回数据', res)
+    console.warn('返回并处理过的数据', res)
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 200) {
       Message({
@@ -133,9 +133,9 @@ async function http(params = {}) {
  * @param data
  */
 export function resPrepared(data) {
-
   if (data) {
-    underlineToHump(data)
+    // underlineToHump(data)
+    numberToString(data)
   }
 }
 
@@ -145,18 +145,17 @@ export function resPrepared(data) {
  * @param data
  */
 export function reqPrepared(config) {
+  // 驼峰转下划线命名
   // post 的参数
   if (config.data) {
     humpToUnderline(config.data)
   }
-
   // get的参数
   if (config.params) {
     humpToUnderline(config.params)
   }
-
   // 排序时的字段
-  // orderby:'userName'
+  // orderby:'userName' => orderby:'user_name'
   if (config.params && config.params.orderby) {
     config.params.orderby = toUnderLine(config.params.orderby)
   }
