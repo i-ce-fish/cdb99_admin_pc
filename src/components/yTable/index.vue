@@ -6,6 +6,7 @@
       style="width: 100%"
       :header-row-style="tableHeaderColor"
       row-key="id"
+      :default-expand-all="defaultExpandAll"
       @sort-change="changeSort"
     >
       <slot />
@@ -26,6 +27,8 @@ export default {
   props: {
     tableData: Array,
     pagination: Object,
+    // 默认展开树形表格、可展开表格的每一项
+    defaultExpandAll: { type: Boolean, default: false, required: false }
   },
   data() {
     return {}

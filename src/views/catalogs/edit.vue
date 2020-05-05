@@ -1,38 +1,38 @@
 <template>
   <div class="card-container">
     <el-card class="box-card">
-      <h3>修改商品分类</h3>
+      <h3>修改图文目录</h3>
       <el-form
-        ref="yForm"
+        ref="catalogForm"
         :model="catalogForm"
         label-width="100px"
+        :rules="catalogRules"
       >
         <el-row>
 
           <el-col :span="12">
-            <el-form-item label="名称:" prop="name">
+            <el-form-item label="目录名:" prop="catalog_name">
               <component
                 is="YInput"
-                v-model="catalogForm.cnname"
+                v-model="catalogForm.catalog_name"
+              />
+
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="12">
+            <el-form-item label="描述:" prop="description">
+              <component
+                is="YInput"
+                v-model="catalogForm.description"
               />
             </el-form-item>
           </el-col>
 
           <el-col :span="12">
-            <el-form-item label="上级ID:" prop="parent_id">
-              <component
-                is="YInput"
-                v-model="catalogForm.pid"
-              />
-            </el-form-item>
-          </el-col>
+            <el-form-item label="父级分类">
+              <y-select v-model="catalogForm.parent_id" :options="parentOptions" />
 
-          <el-col :span="12">
-            <el-form-item label="排序:" prop="sort">
-              <component
-                is="YInput"
-                v-model="catalogForm.sort"
-              />
             </el-form-item>
           </el-col>
 
@@ -45,96 +45,71 @@
         </el-row>
       </el-form>
     </el-card>
+
   </div>
 </template>
 
 <script>
-import { getCatalog, putCatalog } from '@/api/catalog'
-
-import request from '../../utils/request'
+import { getCatalog, getCatalogs, putCatalog } from '@/api/catalog'
 
 export default {
   components: {},
   data() {
     return {
       catalogForm: {},
-      //  apiList
+      catalogRules: {},
+      parentOptions: []
 
-      //  rules
-      rules: {
-        name: [
-          {
-            required: true,
-            message: '请输入品类',
-            trigger: 'blur'
-          }
-        ],
-        remark: [
-          {
-            required: true,
-            message: '请输入备注',
-            trigger: 'blur'
-          }
-        ],
-        parent_id: [
-          {
-            required: true,
-            message: '请输入上级ID',
-            trigger: 'blur'
-          }
-        ],
-        catalog_id: [
-          {
-            required: true,
-            message: '请选择品类',
-            trigger: 'blur'
-          }
-        ],
-        depth: [
-          {
-            required: true,
-            message: '请输入深度',
-            trigger: 'blur'
-          }
-        ]
-      }
     }
   },
   created() {
-    this.get()
+    this.init()
     //    getApiList
   },
   mounted() {
   },
   methods: {
+    init() {
+      this.getParentOptions()
+      this.get()
+    },
+
     async get() {
       const response = await getCatalog(this.$route.query.id)
       this.catalogForm = response.data
     },
-    //    getApiList
 
-    async api() {
-      const res = await putCatalog(this.catalogForm.id, this.catalogForm)
-      // if (res.code === '200') {
+    async edit() {
+      const res = await putCatalog(this.$route.query.id,this.catalogForm)
+
       this.$router.push({ path: '/catalogs' })
-      // }
+      this.$message({
+        message: '添加成功',
+        type: 'success'
+      })
     },
-    async submit(catalogForm) {
-      this.$refs.yForm.validate(valid => {
+
+    async submit() {
+      this.$refs.catalogForm.validate(valid => {
         if (valid) {
-          this.api()
-          this.$message({
-            message: '修改成功',
-            type: 'success'
-          })
+          this.edit()
         } else {
           return false
         }
       })
     },
-    back() {
-      history.back()
+    async getParentOptions() {
+      const res = await getCatalogs({ parent_id: 0 })
+      this.parentOptions = res.data.list.map(item => ({
+        value: item.id,
+        label: item.catalog_name
+      }))
+      this.parentOptions.splice(0, 0, {
+        value: '0',
+        label: '一级分类'
+      })
     }
+
   }
 }
 </script>

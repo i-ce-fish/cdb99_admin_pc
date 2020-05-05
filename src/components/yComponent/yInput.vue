@@ -1,10 +1,17 @@
 <template>
-  <el-input v-model="result" :size="size" placeholder="请输入" @input="input" />
+  <el-input v-model="result" :size="size" :placeholder="placeholder" :disabled="disabled" @input="input" />
 </template>
 <script>
 export default {
   components: {},
-  props: { value: String, size: { type: String, default: 'small', required: false }},
+  props: {
+    value: String, size: { type: String, default: 'small', required: false },
+    disabled: { type: Boolean, default: false, required: false },
+    placeholder: {
+      type: String, default: '请输入',
+      required: false
+    }
+  },
   data() {
     return {
       result: this.value

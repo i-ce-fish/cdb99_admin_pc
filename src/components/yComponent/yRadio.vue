@@ -7,16 +7,15 @@
 
 export default {
   props: {
-    value: String,
+    value: [Boolean, String],
     options:
         {
           type: Array,
           require: false,
           default: () =>
             [
-              { value: '1', label: '选项1' },
-              { value: '2', label: '选项2' },
-              { value: '3', label: '选项3' }
+              { value: true, label: '是' },
+              { value: false, label: '否' }
             ]
         }
   },
@@ -25,12 +24,12 @@ export default {
       result: this.value
     }
   },
-  created() {
-  },
   watch: {
     value(val) {
       this.result = val
     }
+  },
+  created() {
   },
   methods: {
     change() {

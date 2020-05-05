@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard app-container">
-    <el-row   type="flex">
+    <el-row type="flex">
       <el-col v-for="i in 4" :key="i">
         <el-card class="box-card">
           <el-row class="card-header">
@@ -23,29 +23,41 @@
     </el-row>
     <el-row>
       <el-col>
-        <el-card class="box-card">
-          <div v-for="o in 4" :key="o" class="text item">
-            {{ '列表内容 ' + o }}
-          </div>
-        </el-card>
+        <!--        <el-card class="box-card">-->
+        <!--          <div v-for="o in 4" :key="o" class="text item">-->
+        <!--            {{ '列表内容 ' + o }}-->
+        <!--          </div>-->
+        <Tinymce ref="editor" v-model="content" :height="400" />
+        <!--        </el-card>-->
+
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
+import Tinymce from '@/components/Tinymce/tinymce'
 
-export default {}
+export default {
+  components: { Tinymce },
+  data() {
+    return {
+      content: ''
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
   @import "~@/styles/variables.scss";
 
-  .dashboard{
+  .dashboard {
     background-color: $colorBgGrey;
     min-height: 100vh;
-    .box-card{
-      margin:10px;
-      .num{
+
+    .box-card {
+      margin: 10px;
+
+      .num {
         font-size: 30px;
       }
     }

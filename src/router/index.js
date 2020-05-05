@@ -13,6 +13,9 @@ import usersRouter from './user'
 import customersRouter from './customer'
 import wearsRouter from './wears'
 import outfitsRouter from './outfits'
+import articlesRouter from './articles'
+import catalogsRouter from './catalogs'
+import goodsRouter from './goods'
 // import inventoriesRouter from '@/router/inventories'
 // import productsRouter from '@/router/products'
 // import sales_ordersRouter from '@/router/sales_orders'
@@ -75,7 +78,7 @@ export const constantRoutes = [
     }]
   },
   // catalogsRouter,
-  productsRouter,
+  // productsRouter,
   categoriesRouter,
   activitiesRouter,
   ordersRouter,
@@ -83,6 +86,9 @@ export const constantRoutes = [
   customersRouter,
   wearsRouter,
   outfitsRouter,
+  articlesRouter,
+  catalogsRouter,
+  goodsRouter,
   // inventoriesRouter,
   // sales_ordersRouter,
   // {

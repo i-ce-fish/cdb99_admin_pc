@@ -53,6 +53,7 @@ service.interceptors.request.use(
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
       config.headers['Authorization'] = 'Bearer ' + getToken()
+      // config.headers['Authorization'] = 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODcwNDEwNTcsIm5iZiI6MTU4NzA0MTA1NywianRpIjoiOGUzY2ZlMzAtNmJiZi00YWIyLWIyMTMtZDgxZWUxYTE0YjdkIiwiZXhwIjoxNTg3OTA1MDU3LCJpZGVudGl0eSI6MSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.XPzcLOK36lvweasuDcGzdVOkkp5dGtMm7X1mQst7fHs'
       // config.headers['Authorization'] = getToken()
       config.headers['Accept'] = 'application/json'
     }

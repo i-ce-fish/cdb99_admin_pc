@@ -1,26 +1,3 @@
-//
-// const catalogsRouter = [{
-//     path: 'catalogs',
-//     name: 'catalogs',
-//     component: () => import('@/views/catalogs'),
-//     meta: { title: '品类管理', icon: 'tree' }
-//   }, {
-//     path: 'catalogs/edit',
-//     component: () => import('@/views/catalogs/edit'),
-//     hidden: true,
-//     meta: { title: '修改品类' }
-//   },
-//     {
-//       path: 'catalogs/add',
-//       component: () => import('@/views/catalogs/add'),
-//       hidden: true,
-//       meta: { title: '添加品类' }
-//     }
-//   ]
-//
-//
-// export default catalogsRouter
-
 import Layout from '@/layout'
 
 const catalogsRouter = {
@@ -32,18 +9,18 @@ const catalogsRouter = {
     path: 'index',
     name: 'catalogs',
     component: () => import('@/views/catalogs'),
-    meta: { title: '商品分类管理', icon: 'tree' }
+    meta: { title: '图文目录管理', icon: 'tree' }
   }, {
     path: 'edit',
     component: () => import('@/views/catalogs/edit'),
     hidden: true,
-    meta: { title: '修改商品分类' }
+    meta: { title: '修改图文目录' }
   },
   {
     path: 'add',
     component: () => import('@/views/catalogs/add'),
     hidden: true,
-    meta: { title: '添加商品分类' }
+    meta: { title: '添加图文目录' }
   }
   ]
 }

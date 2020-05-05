@@ -9,7 +9,7 @@ import getPageTitle from '@/utils/get-page-title'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 // 服务器未调好时，临时测试用的白名单
-// const whiteList = ['/login', '/categories/index'] // no redirect whitelist
+// const whiteList = ['/login', '/goods/index'] // no redirect whitelist
 const whiteList = ['/login'] // no redirect whitelist
 //
 router.beforeEach(async(to, from, next) => {

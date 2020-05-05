@@ -1,16 +1,60 @@
 <template>
   <div class="app-container">
-    <el-button @click="add">添加商品分类</el-button>
-    <y-table :table-data="tableData" :pagination="pagination" @changePage4List="getList">
+    <el-form
+      ref="catalogForm"
+      :model="catalogForm"
+      :rules="catalogRules"
+      inline
+    >
+      <el-row type="flex" justify="end">
+        <el-form-item>
+          <el-button type="success" @click="add">新增图文</el-button>
+        </el-form-item>
+      </el-row>
+
+      <el-row
+        type="flex"
+        justify="space-between"
+      >
+        <el-col>
+          <el-form-item label="目录名">
+            <YInput
+              v-model="catalogForm.catalog_name"
+            />
+          </el-form-item>
+          <el-form-item label="描述">
+            <YInput
+              v-model="catalogForm.description"
+            />
+          </el-form-item>
+          <el-form-item label="父级编号">
+            <YInput
+              v-model="catalogForm.parent_id"
+            />
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="4">
+          <el-row type="flex" justify="end">
+            <el-form-item>
+              <el-button type="primary" @click="onSearch">查询</el-button>
+              <el-button @click="reset">重置</el-button>
+            </el-form-item>
+          </el-row>
+        </el-col>
+      </el-row>
+
+    </el-form>
+
+    <y-table :table-data="tableData" :pagination="pagination" @sortBy="sortBy" @changePage4List="getList">
       <template>
 
-        <el-table-column prop="cnname" label="名称" />
+        <el-table-column prop="id" label="编号" sortable="custom" width="100" />
+        <el-table-column prop="catalog_name" label="目录名"  />
 
-        <el-table-column prop="pid" label="上级ID" />
+        <el-table-column prop="description" label="描述"  />
 
-        <el-table-column prop="sort" label="排序" />
-
-        <!--        <el-table-column prop="id" label="品类编码" />-->
+        <el-table-column prop="parent_id" label="父级编号"  />
 
         <el-table-column label="操作" width="100px">
           <template slot-scope="{row}">
@@ -30,26 +74,29 @@ export default {
   components: { yTable },
   data() {
     return {
+      catalogForm: {},
       tableData: [],
       pagination: {
         pageNumber: 1,
         pageSize: 10
-      }
+      },
+      catalogRules: {}
     }
   },
   created() {
     this.getList()
   },
   methods: {
-    async getList() {
-      const response = await getCatalogs({
-        page: this.pagination.pageNumber,
-        pagesize: this.pagination.pageSize
-      })
-      // this.tableData = response.data.list
-      // this.pagination.total = parseInt(response.data.pagination.total)
-      this.tableData = response.data
-      this.pagination.total = response.data.length
+    async getList(param) {
+      const response = await getCatalogs(
+        {
+          ...param,
+          page: this.pagination.pageNumber,
+          pagesize: this.pagination.pageSize
+        }
+      )
+      this.tableData = response.data.list
+      this.pagination.total = parseInt(response.data.pagination.total)
     },
 
     add() {
@@ -79,6 +126,16 @@ export default {
             message: '已取消删除'
           })
         })
+    },
+    onSearch(sort) {
+      this.getList({ ...this.catalogForm, ...sort })
+    },
+    sortBy(e) {
+      this.onSearch(e)
+    },
+    reset() {
+      this.articleForm = {}
+      this.getList()
     }
   }
 }

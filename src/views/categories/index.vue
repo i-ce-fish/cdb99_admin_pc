@@ -39,6 +39,7 @@
     <y-table
       :table-data="tableData"
       :pagination="pagination"
+      :default-expand-all="true"
       @sortBy="sortBy"
       @changePage4List="getList"
     >
@@ -101,16 +102,16 @@ export default {
       // 过滤parent_id = 0 ，并初始化子数组
       const parentList = this.tableData
         .filter(item => (item.parent_id === '0'))
-        .map(item => ({ item, children: [] }))
+        .map(item => ({ ...item, children: [] }))
 
       const childList = this.tableData.filter(item => (
         item.parent_id !== '0'
       ))
 
-      //遍历，将son放进father
+      // 遍历，将son放进father
       childList.forEach(child => {
         const parent = parentList.find(father => (
-          child.parent_id === father.item.id
+          child.parent_id === father.id
         ))
         if (parent) {
           parentList[parentList.indexOf(parent)].children.push(child)
@@ -118,7 +119,6 @@ export default {
       })
 
       this.tableData = parentList
-
       this.pagination.total = parseInt(response.data.pagination.total)
     },
     add() {
