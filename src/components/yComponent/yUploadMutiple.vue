@@ -43,6 +43,7 @@ export default {
       type: String,
       default: "#1890ff"
     },
+    // todo 组件优化点
     multiple: { type: Boolean, default: false, required: false }
   },
   data() {
@@ -50,7 +51,8 @@ export default {
       dialogVisible: false,
       uploadUrl: "http://shop.cdb99.com:8088/api/upload",
       readFileUrl: "http://shop.cdb99.com",
-      result: "",
+      // todo 组件优化点
+      result: [],
       fileList: []
     }
   },
@@ -67,6 +69,7 @@ export default {
       // this.$emit('successCBK', arr)
       // this.listObj = {}
       // this.fileList = []
+      console.log(this.result)
       this.$emit("successCBK", this.result)
       this.dialogVisible = false
     },
@@ -80,8 +83,8 @@ export default {
       //     return
       //   }
       // }
-
-      this.result = this.readFileUrl + response.data
+      // todo 组件优化点
+      this.result.push({ url: this.readFileUrl + response.data })
     },
     handleRemove(file) {
       // const uid = file.uid
@@ -108,9 +111,12 @@ export default {
       //   resolve(true)
       // })
     },
-    // 只能上传一张
+
+    // todo 组件优化点
+    //  上传多张图片
     handleChange(file, fileList) {
-      this.fileList = fileList.slice(-1)
+      // console.log(fileList)
+      // this.fileList = fileList
     }
   }
 }

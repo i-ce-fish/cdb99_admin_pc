@@ -18,11 +18,11 @@
 export default {
   props: {
     value: { String },
-    url: { type: String, default: () => 'http://shop.cdb99.com:8088/api/upload' },
-    showUrl: { String, default: () => 'http://shop.cdb99.com' },
+    url: { type: String, default: () => "http://shop.cdb99.com:8088/api/upload" },
+    showUrl: { String, default: () => "http://shop.cdb99.com" },
     //* 类型：图片上传/文件上传
     // file/img
-    type: { type: String, default: () => 'file' }
+    type: { type: String, default: () => "file" }
   },
   data() {
     return { imgUrl: this.value }
@@ -37,7 +37,7 @@ export default {
       this.imgUrl = URL.createObjectURL(file.raw)
       //  todo file List??
       console.log(this.showUrl + res.data)
-      this.$emit('input', this.showUrl + res.data)
+      this.$emit("input", this.showUrl + res.data)
     }
   }
 }

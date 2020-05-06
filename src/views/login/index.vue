@@ -66,38 +66,38 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
-import { login } from '@/api/user'
-import store from '../../store'
+import { validUsername } from "@/utils/validate"
+import { login } from "@/api/user"
+import store from "../../store"
 
 export default {
-  name: 'Login',
+  name: "Login",
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+        callback(new Error("Please enter the correct user name"))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error("The password can not be less than 6 digits"))
       } else {
         callback()
       }
     }
     return {
       loginForm: {
-        username: 'maxazure',
-        password: 'test'
+        username: "maxazure",
+        password: "test"
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur' }],
-        password: [{ required: true, trigger: 'blur' }]
+        username: [{ required: true, trigger: "blur" }],
+        password: [{ required: true, trigger: "blur" }]
       },
       loading: false,
-      passwordType: 'password',
+      passwordType: "password",
       redirect: undefined
     }
   },
@@ -111,10 +111,10 @@ export default {
   },
   methods: {
     showPwd() {
-      if (this.passwordType === 'password') {
-        this.passwordType = ''
+      if (this.passwordType === "password") {
+        this.passwordType = ""
       } else {
-        this.passwordType = 'password'
+        this.passwordType = "password"
       }
       this.$nextTick(() => {
         this.$refs.password.focus()
@@ -123,8 +123,8 @@ export default {
     async handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.$store.dispatch('user/login', this.loginForm).then(async() => {
-            this.$router.push({ path: this.redirect || '/' })
+          this.$store.dispatch("user/login", this.loginForm).then(async() => {
+            this.$router.push({ path: this.redirect || "/" })
             // 登录成功后初始化下拉api常量selectConst
             const hasSelectApi = this.$store.state.localStorage.all
             if (!hasSelectApi) {
@@ -134,7 +134,7 @@ export default {
             this.loading = false
           })
         } else {
-          console.log('error submit!!')
+          console.log("error submit!!")
           return false
         }
       })

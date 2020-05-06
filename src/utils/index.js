@@ -216,3 +216,16 @@ export function chineseToTitleCase(str) {
   return result
 }
 
+
+/**
+ * remove list item
+ * @param item
+ * @returns {string}
+ */
+export function listRemoveItem(list, item) {
+  const index = list.indexOf(item)
+  if (index !== -1) {
+    list.splice(index, 1)
+  }
+}
+
