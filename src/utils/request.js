@@ -1,10 +1,10 @@
-import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
-import store from '@/store'
-import { getToken } from '@/utils/auth'
-import { Loading } from 'element-ui'
+import axios from "axios"
+import { MessageBox, Message } from "element-ui"
+import store from "@/store"
+import { getToken } from "@/utils/auth"
+import { Loading } from "element-ui"
 
-import { humpToUnderline, toUnderLine, underlineToHump, numberToString } from './index'
+import { humpToUnderline, toUnderLine, underlineToHump, numberToString } from "./index"
 
 let loading = null
 let loadTotal = 0
@@ -13,9 +13,9 @@ function ajaxBefore() {
   if (loading == null) {
     loading = Loading.service({
       lock: true,
-      text: '请求执行中',
-      spinner: 'el-icon-loading',
-      background: 'rgba(0, 0, 0, 0)'
+      text: "请求执行中",
+      spinner: "el-icon-loading",
+      background: "rgba(0, 0, 0, 0)"
     })
   }
   loadTotal++
@@ -46,22 +46,22 @@ service.interceptors.request.use(
 
     // data 和 params 的驼峰都转成下划线
     // reqPrepared(config)
-    console.warn('发送并处理过的数据请求:' + config.url, config)
+    console.warn("发送并处理过的数据请求:" + config.url, config)
 
     if (store.getters.token) {
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
-      config.headers['Authorization'] = 'Bearer ' + getToken()
+      config.headers["Authorization"] = "Bearer " + getToken()
       // config.headers['Authorization'] = 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODcwNDEwNTcsIm5iZiI6MTU4NzA0MTA1NywianRpIjoiOGUzY2ZlMzAtNmJiZi00YWIyLWIyMTMtZDgxZWUxYTE0YjdkIiwiZXhwIjoxNTg3OTA1MDU3LCJpZGVudGl0eSI6MSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.XPzcLOK36lvweasuDcGzdVOkkp5dGtMm7X1mQst7fHs'
       // config.headers['Authorization'] = getToken()
-      config.headers['Accept'] = 'application/json'
+      config.headers["Accept"] = "application/json"
     }
     return config
   },
   error => {
     // do something with request error
-    console.log('configErr', error) // for debug
+    console.log("configErr", error) // for debug
     return Promise.reject(error)
   }
 )
@@ -81,40 +81,40 @@ service.interceptors.response.use(
   response => {
     ajaxAfter()
     const res = response.data
-    console.warn('返回并处理过的数据', res)
+    console.warn("返回并处理过的数据", res)
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 200) {
       Message({
-        message: `error code ${res.code}: ${res.msg}` || 'Unknow Error',
-        type: 'error',
+        message: `error code ${res.code}: ${res.msg}` || "Unknow Error",
+        type: "error",
         duration: 3 * 1000
       })
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code === 401 || res.code === 5000) {
-        const map = new Map([[401, '没有授权'], [5000, '登录已过期']])
+        const map = new Map([[401, "没有授权"], [5000, "登录已过期"]])
         // to re-login
-        MessageBox.confirm(map.get(res.code), '前往登录', {
-          confirmButtonText: 'Re-Login',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
+        MessageBox.confirm(map.get(res.code), "前往登录", {
+          confirmButtonText: "Re-Login",
+          cancelButtonText: "Cancel",
+          type: "warning"
         }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
+          store.dispatch("user/resetToken").then(() => {
             location.reload()
           })
         })
       }
 
-      return Promise.reject(new Error(res.msg || 'Error '))
+      return Promise.reject(new Error(res.msg || "Error "))
     } else {
       return res
     }
   },
   error => {
     ajaxAfter()
-    console.log('res' + error) // for debug
+    console.log("res" + error) // for debug
     Message({
       message: error.message,
-      type: 'error',
+      type: "error",
       duration: 3 * 1000
     })
     return Promise.reject(error)

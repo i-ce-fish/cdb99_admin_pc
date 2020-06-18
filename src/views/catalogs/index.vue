@@ -50,11 +50,11 @@
       <template>
 
         <el-table-column prop="id" label="编号" sortable="custom" width="100" />
-        <el-table-column prop="catalog_name" label="目录名"  />
+        <el-table-column prop="catalog_name" label="目录名" />
 
-        <el-table-column prop="description" label="描述"  />
+        <el-table-column prop="description" label="描述" />
 
-        <el-table-column prop="parent_id" label="父级编号"  />
+        <el-table-column prop="parent_id" label="父级编号" />
 
         <el-table-column label="操作" width="100px">
           <template slot-scope="{row}">
@@ -67,8 +67,8 @@
   </div>
 </template>
 <script>
-import { getCatalogs, delCatalog } from '@/api/catalog'
-import yTable from '@/components/yTable'
+import { getCatalogs, delCatalog } from "@/api/catalog"
+import yTable from "@/components/yTable"
 
 export default {
   components: { yTable },
@@ -100,30 +100,30 @@ export default {
     },
 
     add() {
-      this.$router.push({ path: 'add' })
+      this.$router.push({ path: "add" })
     },
     edit(id) {
-      this.$router.push({ path: 'edit', query: { id: id }})
+      this.$router.push({ path: "edit", query: { id: id }})
     },
     del(id) {
-      this.$confirm('是否删除?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      this.$confirm("是否删除?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
       })
         .then(() => {
           delCatalog(id).then(response => {
             this.$message({
-              type: 'success',
-              message: '删除成功!'
+              type: "success",
+              message: "删除成功!"
             })
             this.getList()
           })
         })
         .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消删除'
+            type: "info",
+            message: "已取消删除"
           })
         })
     },

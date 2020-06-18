@@ -9,23 +9,23 @@
 </template>
 
 <script>
-import editorImage from '@/components/Tinymce/editorImage'
-import plugins from '@/components/Tinymce/plugins'
-import toolbar from '@/components/Tinymce/toolbar'
+import editorImage from "@/components/Tinymce/editorImage"
+import plugins from "@/components/Tinymce/plugins"
+import toolbar from "@/components/Tinymce/toolbar"
 
 export default {
-  name: 'Tinymce',
+  name: "Tinymce",
   components: { editorImage },
   props: {
     id: {
       type: String,
       default: function() {
-        return 'vue-tinymce-' + +new Date() + ((Math.random() * 1000).toFixed(0) + '')
+        return "vue-tinymce-" + +new Date() + ((Math.random() * 1000).toFixed(0) + "")
       }
     },
     value: {
       type: String,
-      default: ''
+      default: ""
     },
     toolbar: {
       type: Array,
@@ -38,7 +38,7 @@ export default {
     menubar: {
       type: String,
       // default: 'file edit insert view format table'
-      default: ''
+      default: ""
     },
     height: {
       type: Number,
@@ -48,21 +48,21 @@ export default {
   },
   data() {
     return {
-      val: '',
+      val: "",
       hasChange: false,
       hasInit: false,
       tinymceId: this.id,
       fullscreen: false,
       languageTypeList: {
-        'en': 'en',
-        'zh': 'zh_CN'
+        "en": "en",
+        "zh": "zh_CN"
       }
     }
   },
   computed: {
     language() {
       // return this.languageTypeList[this.$store.getters.language]
-      return 'zh_CN'
+      return "zh_CN"
     }
   },
   watch: {
@@ -70,7 +70,7 @@ export default {
       if (this.val != this.value) {
         if (this.hasInit) {
           this.$nextTick(() =>
-            this.setContent(val || ''))
+            this.setContent(val || ""))
         }
       }
       // let con = this.getContent();
@@ -81,7 +81,7 @@ export default {
       // }
     },
     val() {
-      this.$emit('input', this.val)
+      this.$emit("input", this.val)
     },
     language() {
       this.destroyTinymce()
@@ -107,19 +107,19 @@ export default {
         language: this.language,
         selector: `#${this.tinymceId}`,
         height: this.height,
-        body_class: 'panel-body ',
+        body_class: "panel-body ",
         object_resizing: false,
         toolbar: this.toolbar.length > 0 ? this.toolbar : toolbar,
         menubar: this.menubar,
         plugins: plugins,
         end_container_on_empty_block: true,
-        powerpaste_word_import: 'clean',
+        powerpaste_word_import: "clean",
         code_dialog_height: 450,
         code_dialog_width: 1000,
-        advlist_bullet_styles: 'square',
-        advlist_number_styles: 'default',
-        imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
-        default_link_target: '_blank',
+        advlist_bullet_styles: "square",
+        advlist_number_styles: "default",
+        imagetools_cors_hosts: ["www.tinymce.com", "codepen.io"],
+        default_link_target: "_blank",
         link_title: false,
         nonbreaking_force_tab: true, // inserting nonbreaking space &nbsp; need Nonbreaking Space Plugin
         init_instance_callback: editor => {
@@ -127,14 +127,14 @@ export default {
             editor.setContent(_this.val)
           }
           _this.hasInit = true
-          editor.on('NodeChange Change KeyUp SetContent', () => {
+          editor.on("NodeChange Change KeyUp SetContent", () => {
             this.hasChange = true
             this.val = editor.getContent()
             //  this.$emit('input', editor.getContent())
           })
         },
         setup(editor) {
-          editor.on('FullscreenStateChanged', (e) => {
+          editor.on("FullscreenStateChanged", (e) => {
             _this.fullscreen = e.state
           })
         }
@@ -176,7 +176,7 @@ export default {
     destroyTinymce() {
       const tinymce = window.tinymce.get(this.tinymceId)
       if (this.fullscreen) {
-        tinymce.execCommand('mceFullScreen')
+        tinymce.execCommand("mceFullScreen")
       }
       if (tinymce) {
         tinymce.destroy()

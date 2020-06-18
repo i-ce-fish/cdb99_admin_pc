@@ -8,7 +8,7 @@
     >
       <el-row type="flex" justify="end">
         <el-form-item>
-          <el-button type="success" @click="add">新增图文</el-button>
+          <el-button type="success" @click="add">新增商品</el-button>
         </el-form-item>
       </el-row>
 
@@ -126,7 +126,6 @@ export default {
         pageNumber: 1,
         pageSize: 10
       },
-
       goodRules: { }
     }
   },
@@ -135,13 +134,19 @@ export default {
   },
   methods: {
     async getList(param) {
+      console.log("before")
       const response = await getGoods(
         {
           ...param,
           page: this.pagination.pageNumber,
           pagesize: this.pagination.pageSize
         }
+      ).then(
+        console.log("then")
       )
+
+      await console.log("await")
+      console.log("no await")
       this.tableData = response.data.list
       this.pagination.total = parseInt(response.data.pagination.total)
     },
@@ -183,9 +188,6 @@ export default {
     reset() {
       this.goodForm = {}
       this.getList()
-    },
-    handleClose(e) {
-      console.log(e)
     }
   }
 }

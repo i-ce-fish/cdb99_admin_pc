@@ -128,12 +128,12 @@
   </el-form>
 </template>
 <script>
-import { addProduct } from '@/api/product'
-import request from '../../utils/request'
-import { chineseToTitleCase } from '../../utils'
-import { mapGetters } from 'vuex'
-import SelectCatalog from '../../components/selectCatalog'
-import SelectYear from '../../components/selectYear'
+import { addProduct } from "@/api/product"
+import request from "../../utils/request"
+import { chineseToTitleCase } from "../../utils"
+import { mapGetters } from "vuex"
+import SelectCatalog from "../../components/selectCatalog"
+import SelectYear from "../../components/selectYear"
 
 export default {
 
@@ -141,7 +141,7 @@ export default {
   props: {},
   data() {
     return {
-      productForm: { purcash_model: '0', product_year: '' },
+      productForm: { purcash_model: "0", product_year: "" },
       //  apiList
       catalog_idOptions: [],
       brand_idOptions: [],
@@ -157,8 +157,8 @@ export default {
         catalog_id: [
           {
             required: true,
-            message: '请选择品类',
-            trigger: 'blur'
+            message: "请选择品类",
+            trigger: "blur"
           }
         ],
         product_year: [],
@@ -170,64 +170,64 @@ export default {
         shortno: [],
         description: []
       },
-      catalogPlaceholder: '选择品类',
+      catalogPlaceholder: "选择品类",
       showCatalog: false,
       productYearOptions: []
     }
   },
   computed: {
     ...mapGetters([
-      'selectConst'
+      "selectConst"
     ]),
 
     sugShortno: {
       get() {
         // const brand = this.productForm.brand_id ? chineseToTitleCase(this.productForm.brand_id) : ''
-        let brand = ''
+        let brand = ""
         if (this.productForm.brand_id) {
           const brandLabel = this.brand_idOptions.find(item =>
             item.value === this.productForm.brand_id
           ).label
           brand = chineseToTitleCase(brandLabel)
         }
-        const gender = this.productForm.product_gender ? this.productForm.product_gender : ''
-        const no = '00'
-        const catalog = this.productForm.catalog_id ? this.prefixInteger(this.productForm.catalog_id, 2) + no : ''
+        const gender = this.productForm.product_gender ? this.productForm.product_gender : ""
+        const no = "00"
+        const catalog = this.productForm.catalog_id ? this.prefixInteger(this.productForm.catalog_id, 2) + no : ""
         const result = `${brand}${gender}${catalog}`
-        this.$set(this.productForm, 'shortno', result)
+        this.$set(this.productForm, "shortno", result)
         return result
       },
       set(val) {
-        this.$set(this.productForm, 'shortno', val)
+        this.$set(this.productForm, "shortno", val)
       }
     },
     sugProductName: {
       get() {
-        let brand = ''
+        let brand = ""
         if (this.productForm.brand_id) {
           brand = this.brand_idOptions.find(item =>
             item.value === this.productForm.brand_id
           ).label
         }
 
-        let gender = ''
+        let gender = ""
         if (this.productForm.product_gender) {
           gender = this.product_genderOptions.find(item =>
             item.value === this.productForm.product_gender
-          ).label + '款'
+          ).label + "款"
         }
-        let catalog = ''
+        let catalog = ""
         if (this.productForm.catalog_id) {
           catalog = this.catalog_idOptions.find(item =>
             item.value === this.productForm.catalog_id
           ).label
         }
         const result = `${brand}${gender}${catalog}`
-        this.$set(this.productForm, 'product_name', result)
+        this.$set(this.productForm, "product_name", result)
         return result
       },
       set(val) {
-        this.$set(this.productForm, 'product_name', val)
+        this.$set(this.productForm, "product_name", val)
       }
     }
   },
@@ -251,10 +251,10 @@ export default {
 
     async api() {
       const res = await addProduct(this.productForm)
-      this.$emit('submitAfter', this.productForm)
+      this.$emit("submitAfter", this.productForm)
       this.$message({
-        message: '添加成功',
-        type: 'success'
+        message: "添加成功",
+        type: "success"
       })
     },
 
@@ -269,17 +269,17 @@ export default {
     },
 
     async getbrand_idList() {
-      const response = await request({ url: '/api/siteconfig/brands', method: 'get' })
+      const response = await request({ url: "/api/siteconfig/brands", method: "get" })
       this.brand_idOptions = response.data
     },
 
     async getcatalog_idList() {
-      const response = await request({ url: '/api/siteconfig/catalogs', method: 'get' })
+      const response = await request({ url: "/api/siteconfig/catalogs", method: "get" })
       this.catalog_idOptions = response.data
     },
 
     async getfabric_idList() {
-      const response = await request({ url: '/api/siteconfig/pfabrics', method: 'get' })
+      const response = await request({ url: "/api/siteconfig/pfabrics", method: "get" })
       this.fabric_idOptions = response.data
     },
 
@@ -290,7 +290,7 @@ export default {
        * @returns {string}
        */
     prefixInteger(num, length) {
-      return (Array(length).join('0') + num).slice(-length)
+      return (Array(length).join("0") + num).slice(-length)
     },
     changePerennial(val) {
       this.productYearDisable = val

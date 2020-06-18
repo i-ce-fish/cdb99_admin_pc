@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import yForm from '@/components/yForm'
+import yForm from "@/components/yForm"
 
-import request from '../../utils/request'
+import request from "../../utils/request"
 
 export default {
   components: {
@@ -28,45 +28,45 @@ export default {
   data() {
     return {
       list: [{
-        'id': 26,
-        'name': 'email',
-        'cnname': '邮箱',
-        'field_type': 'string',
-        'api': null,
-        'sort': null,
-        'ctype': 'YRadio'
+        "id": 26,
+        "name": "email",
+        "cnname": "邮箱",
+        "field_type": "string",
+        "api": null,
+        "sort": null,
+        "ctype": "YRadio"
       }, {
-        'id': 26,
-        'name': 'email',
-        'cnname': '邮箱',
-        'field_type': 'string',
-        'api': null,
-        'sort': null,
-        'ctype': 'YCheckbox'
+        "id": 26,
+        "name": "email",
+        "cnname": "邮箱",
+        "field_type": "string",
+        "api": null,
+        "sort": null,
+        "ctype": "YCheckbox"
       }, {
-        'id': 26,
-        'name': 'email',
-        'cnname': '邮箱',
-        'field_type': 'string',
-        'api': null,
-        'sort': null,
-        'ctype': 'YDatepicker'
+        "id": 26,
+        "name": "email",
+        "cnname": "邮箱",
+        "field_type": "string",
+        "api": null,
+        "sort": null,
+        "ctype": "YDatepicker"
       }, {
-        'id': 26,
-        'name': 'email',
-        'cnname': '邮箱',
-        'field_type': 'string',
-        'api': null,
-        'sort': null,
-        'ctype': 'YNumber'
+        "id": 26,
+        "name": "email",
+        "cnname": "邮箱",
+        "field_type": "string",
+        "api": null,
+        "sort": null,
+        "ctype": "YNumber"
       }, {
-        'id': 26,
-        'name': 'email',
-        'cnname': '邮箱',
-        'field_type': 'string',
-        'api': '/api/siteconfig/companies',
-        'sort': null,
-        'ctype': 'YSelect'
+        "id": 26,
+        "name": "email",
+        "cnname": "邮箱",
+        "field_type": "string",
+        "api": "/api/siteconfig/companies",
+        "sort": null,
+        "ctype": "YSelect"
       }
       ],
       rules: null,
@@ -82,8 +82,8 @@ export default {
     async get() {
       this.list.map(async(item) => {
         if (item.api) {
-          this.$set(item, 'options', [])
-          const res = await request({ url: item.api, method: 'get' })
+          this.$set(item, "options", [])
+          const res = await request({ url: item.api, method: "get" })
           item.options = res.data
         }
       })

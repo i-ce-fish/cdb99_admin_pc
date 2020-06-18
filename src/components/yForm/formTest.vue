@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <yForm ref="yForm" :formData="formData" :rules="rules">
+    <yForm ref="yForm" :form-data="formData" :rules="rules">
       <template>
         <el-form-item label="用户名:" prop="username">
           <el-input v-model="formData.username" />
@@ -27,7 +27,7 @@
               :key="item.value"
               :label="item.label"
               :value="item.value"
-            ></el-option>
+            />
           </el-select>
         </el-form-item>
         <el-form-item label="公司:" prop="company_id">
@@ -37,7 +37,7 @@
               :key="item.value"
               :label="item.label"
               :value="item.value"
-            ></el-option>
+            />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -50,19 +50,19 @@
 </template>
 
 <script>
-import { getUser, addUser, selectCompanies, selectRoles } from "@/api/user";
+import { getUser, addUser, selectCompanies, selectRoles } from "@/api/user"
 
-import yForm from "@/components/yForm";
+import yForm from "@/components/yForm"
 export default {
   components: { yForm },
   data() {
     const checkPassword2 = (rule, value, callback) => {
       if (value && value !== this.formData.password) {
-        callback(new Error("两次输入密码不一致!"));
+        callback(new Error("两次输入密码不一致!"))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       formData: { company_id: "", role_id: "" },
       companies: [],
@@ -135,44 +135,44 @@ export default {
           }
         ]
       }
-    };
+    }
   },
   created() {
-    this.selectCompanies();
-    this.selectRoles();
+    this.selectCompanies()
+    this.selectRoles()
   },
   mounted() {},
   methods: {
     async addUser() {
-      this.$router.push({ path: "/management/users" });
-      const res = await addUser(this.formData);
+      this.$router.push({ path: "/management/users" })
+      const res = await addUser(this.formData)
     },
     async submit(formData) {
       this.$refs.yForm.check(valid => {
         if (valid) {
-          this.addUser();
+          this.addUser()
           this.$message({
             message: "添加成功",
             type: "success"
-          });
+          })
         } else {
-          return false;
+          return false
         }
-      });
+      })
     },
     async selectCompanies() {
-      const res = await selectCompanies();
-        this.companies = res.data;
+      const res = await selectCompanies()
+      this.companies = res.data
     },
     async selectRoles() {
-      const res = await selectRoles();
-        this.roles.push = res.data;
+      const res = await selectRoles()
+      this.roles.push = res.data
     },
     back() {
-      this.$router.push({ path: "/management/users" });
+      this.$router.push({ path: "/management/users" })
     }
   }
-};
+}
 </script>
 
 <style scope>

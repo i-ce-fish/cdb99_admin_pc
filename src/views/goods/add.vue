@@ -272,7 +272,7 @@
           </el-col>
           <el-col :span="24">
             <el-form-item label="产品参数:" prop="produt_parameter">
-              <div v-for="(item,index) in goodForm.produt_parameter" class="">
+              <div v-for="(item,index) in goodForm.produt_parameter" :key="index" class="">
                 <el-row type="flex">
                   <el-col :span="10">
                     <el-row type="flex">
@@ -324,19 +324,20 @@
       :visible.sync="showColor"
       width="30%"
       :before-close="handleClose"
+
     >
       <el-form label-position="left" inline class="demo-table-expand">
         <el-form-item label="颜色名字">
           <YInput
-            v-model="goodForm.name"
+            v-model="colorTemp.name"
           />
         </el-form-item> <el-form-item label="颜色缩略图">
           <YInput
-            v-model="goodForm.name"
+            v-model="colorTemp.color_thumbnail"
           />
         </el-form-item> <el-form-item label="图片缩略图">
           <YInput
-            v-model="goodForm.name"
+            v-model="colorTemp.good_thumbnail"
           />
         </el-form-item>
 
@@ -356,23 +357,23 @@
       <el-form label-position="left" inline class="demo-table-expand">
         <el-form-item label="尺码名">
           <YInput
-            v-model="goodForm.size_name"
+            v-model="sizeTemp.name"
           />
         </el-form-item>
         <el-form-item label="尺寸显示名">
           <YInput
-            v-model="goodForm.size_name"
+            v-model="sizeTemp.show_name"
           />
         </el-form-item>
         <el-form-item label="尺寸解释">
           <YInput
-            v-model="goodForm.size_name"
+            v-model="sizeTemp.descri"
           />
         </el-form-item>
 
         <el-form-item label="库存数量">
           <YInput
-            v-model="goodForm.inventory"
+            v-model="sizeTemp.inventory"
           />
         </el-form-item>
       </el-form>
@@ -439,14 +440,14 @@ export default {
 
           }
         ],
-        colors: [
-          {
-            color_name: "绿色",
-            color_thumbnail: "color_thumbnail",
-            product_thumbnail: "product_thumbnail",
-            sizes: [{ size_name: "M", display_name: "150/80A/M", description: "尺寸解释", inventory: "99" }]
-          }
-        ],
+        // colors: [
+        //   {
+        //     color_name: "绿色",
+        //     color_thumbnail: "color_thumbnail",
+        //     product_thumbnail: "product_thumbnail",
+        //     sizes: [{ size_name: "M", display_name: "150/80A/M", description: "尺寸解释", inventory: "99" }]
+        //   }
+        // ],
         // 产品参数
         produt_parameter: [],
         //  轮播图

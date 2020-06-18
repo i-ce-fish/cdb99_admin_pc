@@ -5,10 +5,10 @@
 export default {
   components: {},
   props: {
-    value: String, size: { type: String, default: 'small', required: false },
+    value: String, size: { type: String, default: "small", required: false },
     disabled: { type: Boolean, default: false, required: false },
     placeholder: {
-      type: String, default: '请输入',
+      type: String, default: "请输入",
       required: false
     }
   },
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     input() {
-      this.$emit('input', this.result)
+      this.$emit("input", this.result)
     }
   }
 }

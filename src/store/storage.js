@@ -1,7 +1,7 @@
-import store from 'store'
+import store from "store"
 
 // 缓存数据的key
-const WEB_NAME = 'SELECT_API_ALL'
+const WEB_NAME = "SELECT_API_ALL"
 
 export const storage = {
   set setLocalStorageName(val) {

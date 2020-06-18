@@ -9,7 +9,7 @@
 export default {
   components: {},
   data() {
-    return { activeName: 'first' }
+    return { activeName: "first" }
   },
   computed: {},
   watch: {},

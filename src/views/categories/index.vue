@@ -58,8 +58,8 @@
   </div>
 </template>
 <script>
-import { getCategories, delCategory } from '@/api/category'
-import yTable from '@/components/yTable'
+import { getCategories, delCategory } from "@/api/category"
+import yTable from "@/components/yTable"
 
 export default {
   components: { yTable },
@@ -70,7 +70,7 @@ export default {
       pagination: {
         pageNumber: 1,
         pageSize: 10,
-        layout: 'total'
+        layout: "total"
       },
       categoryRules: {},
       parentOptions: []
@@ -101,11 +101,11 @@ export default {
 
       // 过滤parent_id = 0 ，并初始化子数组
       const parentList = this.tableData
-        .filter(item => (item.parent_id === '0'))
+        .filter(item => (item.parent_id === "0"))
         .map(item => ({ ...item, children: [] }))
 
       const childList = this.tableData.filter(item => (
-        item.parent_id !== '0'
+        item.parent_id !== "0"
       ))
 
       // 遍历，将son放进father
@@ -122,30 +122,30 @@ export default {
       this.pagination.total = parseInt(response.data.pagination.total)
     },
     add() {
-      this.$router.push({ path: 'add' })
+      this.$router.push({ path: "add" })
     },
     edit(id) {
-      this.$router.push({ path: 'edit', query: { id: id }})
+      this.$router.push({ path: "edit", query: { id: id }})
     },
     del(id) {
-      this.$confirm('是否删除?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      this.$confirm("是否删除?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
       })
         .then(() => {
           delCategory(id).then(response => {
             this.$message({
-              type: 'success',
-              message: '删除成功!'
+              type: "success",
+              message: "删除成功!"
             })
             this.getList()
           })
         })
         .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消删除'
+            type: "info",
+            message: "已取消删除"
           })
         })
     },

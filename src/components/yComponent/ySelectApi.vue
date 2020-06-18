@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import request from '@/utils/request'
+import request from "@/utils/request"
 
 export default {
   props: { url: { type: String }, value: String },
@@ -14,23 +14,23 @@ export default {
       options: []
     }
   },
-  created() {
-    this.get()
-  },
   watch: {
     value(val) {
       this.result = val
     }
   },
+  created() {
+    this.get()
+  },
   mounted() {
   },
   methods: {
     async get() {
-      const res = await request({ url: this.url, method: 'get' })
+      const res = await request({ url: this.url, method: "get" })
       this.options.push = res.data
     },
     handleChange() {
-      this.$emit('input', this.value)
+      this.$emit("input", this.value)
     }
   }
 }

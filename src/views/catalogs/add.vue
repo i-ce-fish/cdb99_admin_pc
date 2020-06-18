@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { addCatalog, getCatalogs } from '@/api/catalog'
+import { addCatalog, getCatalogs } from "@/api/catalog"
 
 export default {
   components: {},
@@ -70,10 +70,10 @@ export default {
     },
     async add() {
       const res = await addCatalog(this.catalogForm)
-      this.$router.push({ path: '/catalogs' })
+      this.$router.push({ path: "/catalogs" })
       this.$message({
-        message: '添加成功',
-        type: 'success'
+        message: "添加成功",
+        type: "success"
       })
     },
 
@@ -93,8 +93,8 @@ export default {
         label: item.catalog_name
       }))
       this.parentOptions.splice(0, 0, {
-        value: '0',
-        label: '一级分类'
+        value: "0",
+        label: "一级分类"
       })
     }
 

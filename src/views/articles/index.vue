@@ -26,7 +26,8 @@
             <YInput
               v-model="articleForm.title"
             />
-          </el-form-item>  <el-form-item label="栏目编号">
+          </el-form-item>
+          <el-form-item label="栏目编号">
             <YInput
               v-model="articleForm.catalog_id"
             />
@@ -49,7 +50,7 @@
 
         <el-table-column prop="title" label="标题" />
         <el-table-column prop="author" label="作者" width="150" />
-        <el-table-column prop="catalog_id" label="栏目编号" width="100"/>
+        <el-table-column prop="catalog_id" label="栏目编号" width="100" />
         <el-table-column prop="is_header" label="首页头条" sortable="custom" width="100">
           <template slot-scope="scope">
             <i :class="scope.row.is_header? 'el-icon-check':'el-icon-close'" />
@@ -61,11 +62,11 @@
             <i :class="scope.row.is_col_header? 'el-icon-check':'el-icon-close'" />
           </template>
         </el-table-column>
-<!--        <el-table-column prop="body" label="图文" :show-overflow-tooltip="true">-->
-<!--          <template slot-scope="scope">-->
-<!--            <span v-html="scope.row.body" />-->
-<!--          </template>-->
-<!--        </el-table-column>-->
+        <!--        <el-table-column prop="body" label="图文" :show-overflow-tooltip="true">-->
+        <!--          <template slot-scope="scope">-->
+        <!--            <span v-html="scope.row.body" />-->
+        <!--          </template>-->
+        <!--        </el-table-column>-->
         <el-table-column label="操作" width="100px">
           <template slot-scope="{row}">
             <el-button type="text" size="small" @click="edit(row.id)">修改</el-button>
@@ -77,8 +78,8 @@
   </div>
 </template>
 <script>
-import { getArticles, delArticle } from '@/api/articles'
-import yTable from '@/components/yTable'
+import { getArticles, delArticle } from "@/api/articles"
+import yTable from "@/components/yTable"
 
 export default {
   components: { yTable },
@@ -92,9 +93,9 @@ export default {
       },
       articleRules: {},
       roleOptions: [
-        { value: '0', label: '管理员' },
+        { value: "0", label: "管理员" },
         {
-          value: '1', label: '普通图文'
+          value: "1", label: "普通图文"
         }
       ]
     }
@@ -116,30 +117,30 @@ export default {
     },
 
     add() {
-      this.$router.push({ path: 'add' })
+      this.$router.push({ path: "add" })
     },
     edit(id) {
-      this.$router.push({ path: 'edit', query: { id: id }})
+      this.$router.push({ path: "edit", query: { id: id }})
     },
     del(id) {
-      this.$confirm('是否删除?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      this.$confirm("是否删除?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
       })
         .then(() => {
           delArticle(id).then(response => {
             this.$message({
-              type: 'success',
-              message: '删除成功!'
+              type: "success",
+              message: "删除成功!"
             })
             this.getList()
           })
         })
         .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消删除'
+            type: "info",
+            message: "已取消删除"
           })
         })
     },

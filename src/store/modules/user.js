@@ -1,11 +1,11 @@
-import { login, logout, getInfo, getUsers } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
-import { resetRouter } from '@/router'
+import { login, logout, getInfo, getUsers } from "@/api/user"
+import { getToken, setToken, removeToken } from "@/utils/auth"
+import { resetRouter } from "@/router"
 
 const state = {
   token: getToken(),
-  name: '',
-  avatar: ''
+  name: "",
+  avatar: ""
 }
 
 const mutations = {
@@ -28,7 +28,7 @@ const actions = {
       // username=>email
       login({ username: username.trim(), password: password }).then(response => {
         const { data } = response
-        commit('SET_TOKEN', data.token)
+        commit("SET_TOKEN", data.token)
         setToken(data.token)
         resolve()
       }).catch(error => {
@@ -51,13 +51,13 @@ const actions = {
 
         if (!data) {
           // if (data.code === 5000) {
-          reject('Verification failed, please Login again.')
+          reject("Verification failed, please Login again.")
         }
 
         const { name, avatar } = data
 
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
+        commit("SET_NAME", name)
+        commit("SET_AVATAR", avatar)
         resolve(data)
       }).catch(error => {
         reject(error)
@@ -76,7 +76,7 @@ const actions = {
     // user logout
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
-        commit('SET_TOKEN', '')
+        commit("SET_TOKEN", "")
         removeToken()
         resetRouter()
         resolve()
@@ -89,7 +89,7 @@ const actions = {
   // remove token
   resetToken({ commit }) {
     return new Promise(resolve => {
-      commit('SET_TOKEN', '')
+      commit("SET_TOKEN", "")
       removeToken()
       resolve()
     })

@@ -82,8 +82,8 @@
 </template>
 
 <script>
-import { addActivity } from '@/api/activity'
-import { getActivity, putActivity } from '../../api/activity'
+import { addActivity } from "@/api/activity"
+import { getActivity, putActivity } from "../../api/activity"
 
 export default {
   components: {},
@@ -110,14 +110,14 @@ export default {
     async api() {
       const res = await putActivity(this.$router.query.id, this.activityForm)
       // if (res.code === '200') {
-      this.$router.push({ path: '/activities' })
+      this.$router.push({ path: "/activities" })
       // }
     },
     async submit(activityForm) {
       this.api()
       this.$message({
-        message: '添加成功',
-        type: 'success'
+        message: "添加成功",
+        type: "success"
       })
 
       // this.$refs.yForm.validate(valid => {

@@ -125,11 +125,11 @@
   </el-form>
 </template>
 <script>
-import { getProduct, putProduct } from '@/api/product'
-import request from '../../utils/request'
-import { mapGetters } from 'vuex'
-import SelectCatalog from '../../components/selectCatalog/index'
-import SelectYear from '../../components/selectYear'
+import { getProduct, putProduct } from "@/api/product"
+import request from "../../utils/request"
+import { mapGetters } from "vuex"
+import SelectCatalog from "../../components/selectCatalog/index"
+import SelectYear from "../../components/selectYear"
 
 export default {
   components: { SelectCatalog, SelectYear },
@@ -154,8 +154,8 @@ export default {
         catalog_id: [
           {
             required: true,
-            message: '请输入品类',
-            trigger: 'blur'
+            message: "请输入品类",
+            trigger: "blur"
           }
         ],
         product_year: [],
@@ -174,7 +174,7 @@ export default {
       product_seasonOptions: [],
       product_purcash_modelOptions: [],
       productYearDisable: false,
-      catalogPlaceholder: '选择品类',
+      catalogPlaceholder: "选择品类",
       productYearOptions: [],
 
       showCatalog: false
@@ -196,7 +196,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'selectConst'
+      "selectConst"
     ])
   },
   mounted() {
@@ -216,28 +216,27 @@ export default {
     },
     //    getApiList
     async getbrand_idList() {
-      const response = await request({ url: '/api/siteconfig/brands', method: 'get' })
+      const response = await request({ url: "/api/siteconfig/brands", method: "get" })
       this.brand_idOptions = response.data
     },
 
     async getcatalog_idList() {
-      const response = await request({ url: '/api/siteconfig/catalogs', method: 'get' })
+      const response = await request({ url: "/api/siteconfig/catalogs", method: "get" })
       this.catalog_idOptions = response.data
       this.catalogPlaceholder = this.catalog_idOptions.find(item => item.value === this.productForm.catalog_id).label
     },
 
     async getfabric_idList() {
-      const response = await request({ url: '/api/siteconfig/pfabrics', method: 'get' })
+      const response = await request({ url: "/api/siteconfig/pfabrics", method: "get" })
       this.fabric_idOptions = response.data
     },
     async api() {
       const res = await putProduct(this.productForm.id, this.productForm)
-      this.$emit('submitAfter', this.productForm)
+      this.$emit("submitAfter", this.productForm)
       this.$message({
-        message: '修改成功',
-        type: 'success'
+        message: "修改成功",
+        type: "success"
       })
-
     },
     async submit(productForm) {
       this.$refs.yForm.validate(valid => {
@@ -249,7 +248,7 @@ export default {
       })
     },
     back() {
-      this.$router.push({ path: '/infoManagement/products' })
+      this.$router.push({ path: "/infoManagement/products" })
     },
     changePerennial(val) {
       this.productYearDisable = val

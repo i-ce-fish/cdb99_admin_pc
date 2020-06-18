@@ -438,7 +438,7 @@ export default {
       json2js(obj, "material")
       json2js(obj, "colors")
       json2js(obj, "carousels")
-      console.log(2,obj)
+      console.log(2, obj)
     }
   }
 

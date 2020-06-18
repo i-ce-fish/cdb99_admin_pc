@@ -1,6 +1,6 @@
 
-import { storage } from '../storage'
-import { selectAll } from '@/api/select'
+import { storage } from "../storage"
+// import { selectAll } from '@/api/select'
 
 const state = {
   // 默认读取storage里面的数据
@@ -17,8 +17,8 @@ const mutations = {
 
 const actions = {
   async setSelectConst({ commit, state }) {
-    const res = await selectAll()
-    commit('SET_DATA', res.data)
+    const res = "await selectAll()"
+    commit("SET_DATA", res.data)
   }
 }
 

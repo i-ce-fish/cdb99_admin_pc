@@ -13,7 +13,7 @@ export default {
     convertIdToLabel(form) {
       for (const arg in form) {
         if (form[arg] && this.$store.getters.selectConst[arg]) {
-          const label = arg + '_label'
+          const label = arg + "_label"
           const index = form[arg]
           const value = this.$store.getters.selectConst[arg][index]
           form[label] = value.label

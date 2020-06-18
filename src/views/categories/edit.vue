@@ -44,7 +44,7 @@
 
 <script>
 
-import { putCategory, getCategory, getCategories } from '../../api/category'
+import { putCategory, getCategory, getCategories } from "../../api/category"
 
 export default {
 
@@ -73,8 +73,8 @@ export default {
       }))
 
       this.parentOptions.splice(0, 0, {
-        value: '0',
-        label: '一级分类'
+        value: "0",
+        label: "一级分类"
       })
     },
 
@@ -85,11 +85,11 @@ export default {
 
     async api() {
       const res = await putCategory(this.$route.query.id, this.categoryForm)
-      this.$router.push({ path: '/categories' })
+      this.$router.push({ path: "/categories" })
 
       this.$message({
-        message: '添加成功',
-        type: 'success'
+        message: "添加成功",
+        type: "success"
       })
     },
 

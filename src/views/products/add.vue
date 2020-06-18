@@ -230,7 +230,7 @@
 
 <script>
 
-import { addProduct } from '../../api/product'
+import { addProduct } from "../../api/product"
 
 export default {
 
@@ -239,16 +239,16 @@ export default {
       productForm: {},
       rules: {},
       tableData: [{
-        id: '12987122',
-        name: '黄色'
+        id: "12987122",
+        name: "黄色"
       }, {
-        id: '12987123',
-        name: '绿色'
+        id: "12987123",
+        name: "绿色"
       }],
       sizesDate: [
-        { name: 'S', inventory: '1' },
-        { name: 'M', inventory: '1' },
-        { name: 'L', inventory: '1' }
+        { name: "S", inventory: "1" },
+        { name: "M", inventory: "1" },
+        { name: "L", inventory: "1" }
 
       ],
       num: 2,
@@ -289,11 +289,11 @@ export default {
 
     async api() {
       const res = await addProduct(this.productForm)
-      this.$router.push({ path: '/products' })
+      this.$router.push({ path: "/products" })
 
       this.$message({
-        message: '添加成功',
-        type: 'success'
+        message: "添加成功",
+        type: "success"
       })
     },
 
@@ -310,13 +310,13 @@ export default {
     addColor() {
       this.showColor = true
       this.tableData.push({
-        id: '12987123',
-        name: '红色'
+        id: "12987123",
+        name: "红色"
       })
     },
     onAddSize() {
       this.showSize = true
-      this.sizesDate.push({ name: 'test' })
+      this.sizesDate.push({ name: "test" })
     },
     onDelSize() {
       this.sizesDate.pop()

@@ -34,15 +34,15 @@
 export default {
 
   props: {
-    value: { type: String, required: true, default: '' },
+    value: { type: String, required: true, default: "" },
     options: { type: Array, required: true, default: () => [] },
-    placeholder: { type: String, default: '请选择' }
+    placeholder: { type: String, default: "请选择" }
   },
   data() {
     return {
       result: this.value,
       popVisible: false,
-      newId: ''
+      newId: ""
     }
   },
   watch: {
@@ -52,20 +52,20 @@ export default {
   },
   methods: {
     change() {
-      this.$emit('input', this.result)
+      this.$emit("input", this.result)
       const isInOptions = this.options.find(item => item.value === this.result)
       if (!isInOptions) {
         this.popVisible = true
       }
     },
     cancel() {
-      this.result = ''
-      this.$emit('input', this.result)
+      this.result = ""
+      this.$emit("input", this.result)
       this.popVisible = false
     },
     confirm() {
       this.popVisible = false
-      this.$emit('confirm', this.newId, this.result)
+      this.$emit("confirm", this.newId, this.result)
     }
   }
 }

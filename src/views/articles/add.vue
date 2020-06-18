@@ -98,8 +98,8 @@
 
 <script>
 
-import { addArticle } from '../../api/articles'
-import Tinymce from '@/components/Tinymce/tinymce'
+import { addArticle } from "../../api/articles"
+import Tinymce from "@/components/Tinymce/tinymce"
 
 export default {
 
@@ -115,11 +115,11 @@ export default {
 
     async api() {
       const res = await addArticle(this.articleForm)
-      this.$router.push({ path: '/articles' })
+      this.$router.push({ path: "/articles" })
 
       this.$message({
-        message: '添加成功',
-        type: 'success'
+        message: "添加成功",
+        type: "success"
       })
     },
 

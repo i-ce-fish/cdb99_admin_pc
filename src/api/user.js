@@ -1,89 +1,87 @@
-import request from '@/utils/request'
+import request from "@/utils/request"
 
 export function login(data) {
   return request({
-    url: '/api/auth/login',
-    method: 'post',
+    url: "/api/auth/login",
+    method: "post",
     data
   })
 }
 
 export function getInfo(token) {
   return request({
-    url: '/api/auth/userinfo',
-    method: 'get',
+    url: "/api/auth/userinfo",
+    method: "get",
     params: { token }
   })
 }
 
 export function logout() {
   return request({
-    url: '/api/auth/logout',
-    method: 'post'
+    url: "/api/auth/logout",
+    method: "post"
   })
 }
 
 export function getUsers(params) {
   return request({
-    url: '/api/users',
-    method: 'get',
+    url: "/api/users",
+    method: "get",
     params
   })
 }
 
 export function getUser(id) {
   return request({
-    url: '/api/users/' + id,
-    method: 'get'
+    url: "/api/users/" + id,
+    method: "get"
   })
 }
 
 export function addUser(data) {
   return request({
-    url: '/api/users',
-    method: 'post',
+    url: "/api/users",
+    method: "post",
     data
   })
 }
 
 export function putUser(id, data) {
   return request({
-    url: '/api/users/' + id,
-    method: 'put',
+    url: "/api/users/" + id,
+    method: "put",
     data
   })
 }
 
 export function delUser(id) {
   return request({
-    url: '/api/users/' + id,
-    method: 'delete'
+    url: "/api/users/" + id,
+    method: "delete"
   })
 }
 
-
-
-//remove
+// remove
 export function getRoles(params) {
   return request({
-    url: '/api/',
-    method: 'get',
+    url: "/api/",
+    method: "get",
     params
   })
 }
 export function selectCompanies(params) {
-  const url = '/api/siteconfig/companies'
+  const url = "/api/siteconfig/companies"
 
   return request({
     url,
-    method: 'get',
+    method: "get",
     params
   }, url)
 }
 export function selectRoles(params) {
   return request({
-    url: '/api/siteconfig/roles',
-    method: 'get',
+    url: "/api/siteconfig/roles",
+    method: "get",
     params
   })
 }

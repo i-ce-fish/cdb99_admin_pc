@@ -60,7 +60,7 @@
 
 <script>
 
-import { addWear } from '../../api/wear'
+import { addWear } from "../../api/wear"
 
 export default {
 
@@ -74,11 +74,11 @@ export default {
 
     async api() {
       const res = await addWear(this.wearForm)
-      this.$router.push({ path: '/wears' })
+      this.$router.push({ path: "/wears" })
 
       this.$message({
-        message: '添加成功',
-        type: 'success'
+        message: "添加成功",
+        type: "success"
       })
     },
 

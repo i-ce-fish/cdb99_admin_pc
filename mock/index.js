@@ -1,9 +1,9 @@
-import Mock from 'mockjs'
-import { param2Obj } from '../src/utils'
+import Mock from "mockjs"
+import { param2Obj } from "../src/utils"
 
-import user from './user'
-import table from './table'
-import management from './management'
+import user from "./user"
+import table from "./table"
+import management from "./management"
 const mocks = [
   ...user,
   ...table,
@@ -47,7 +47,7 @@ export function mockXHR() {
   }
 
   for (const i of mocks) {
-    Mock.mock(new RegExp(i.url), i.type || 'get', XHR2ExpressReqWrap(i.response))
+    Mock.mock(new RegExp(i.url), i.type || "get", XHR2ExpressReqWrap(i.response))
   }
 }
 
@@ -55,7 +55,7 @@ export function mockXHR() {
 const responseFake = (url, type, respond) => {
   return {
     url: new RegExp(`/mock${url}`),
-    type: type || 'get',
+    type: type || "get",
     response(req, res) {
       res.json(Mock.mock(respond instanceof Function ? respond(req, res) : respond))
     }

@@ -4,7 +4,7 @@
   </el-radio-group>
 </template>
 <script>
-import request from '../../utils/request'
+import request from "../../utils/request"
 
 export default {
   components: {},
@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       options: [],
-      value: ''
+      value: ""
     }
   },
   computed: {},
@@ -24,12 +24,12 @@ export default {
   },
   methods: {
     async get() {
-      const res = await request({ url: this.url, method: 'get' })
+      const res = await request({ url: this.url, method: "get" })
       this.options = res.data
       console.log(res)
     },
     change() {
-      this.$emit('input', this.value)
+      this.$emit("input", this.value)
     }
   }
 }

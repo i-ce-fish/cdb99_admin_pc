@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import request from '../../utils/request'
+import request from "../../utils/request"
 
 export default {
   data() {
@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     async api() {
-      const res = await request({ url: '/api/siteconfig/catalogs', methods: 'get' })
+      const res = await request({ url: "/api/siteconfig/catalogs", methods: "get" })
       this.catalogData = res.data
       const map = new Map()
       // order by parent_id 、value
@@ -40,7 +40,7 @@ export default {
       })
       this.catalogData.forEach(
         (item) => {
-          if (item.parent_id === '0') {
+          if (item.parent_id === "0") {
             item.child = []
             map.set(item.value, item)
           } else {
@@ -51,7 +51,7 @@ export default {
       this.sortData = map
     },
     click(e) {
-      this.$emit('input', e)
+      this.$emit("input", e)
     }
   }
 }

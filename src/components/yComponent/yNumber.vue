@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     handleChange() {
-      this.$emit('input', this.result)
+      this.$emit("input", this.result)
     }
   }
 }

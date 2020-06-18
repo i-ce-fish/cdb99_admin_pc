@@ -1,6 +1,6 @@
 <template>
   <div class="card-container">
-    <test-form ref="form" @submitSuccess="submit" :form="form">
+    <test-form ref="form" :form="form" @submitSuccess="submit">
       <template slot="formitem">
         <el-form-item label="地址:" prop="address">
           <el-input v-model="form.address" />
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import testForm from './comForm'
+import testForm from "./comForm"
 
 export default {
   components: { testForm },
@@ -35,7 +35,7 @@ export default {
       this.$refs.form.submit()
     },
     submitAfter() {
-      console.log('提交成功')
+      console.log("提交成功")
     }
   }
 }

@@ -78,8 +78,8 @@
   </div>
 </template>
 <script>
-import { getUsers, delUser } from '@/api/user'
-import yTable from '@/components/yTable'
+import { getUsers, delUser } from "@/api/user"
+import yTable from "@/components/yTable"
 
 export default {
   components: { yTable },
@@ -93,9 +93,9 @@ export default {
       },
       userRules: {},
       roleOptions: [
-        { value: '0', label: '管理员' },
+        { value: "0", label: "管理员" },
         {
-          value: '1', label: '普通用户'
+          value: "1", label: "普通用户"
         }
       ]
     }
@@ -117,30 +117,30 @@ export default {
     },
 
     add() {
-      this.$router.push({ path: 'add' })
+      this.$router.push({ path: "add" })
     },
     edit(id) {
-      this.$router.push({ path: 'edit', query: { id: id }})
+      this.$router.push({ path: "edit", query: { id: id }})
     },
     del(id) {
-      this.$confirm('是否删除?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      this.$confirm("是否删除?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
       })
         .then(() => {
           delUser(id).then(response => {
             this.$message({
-              type: 'success',
-              message: '删除成功!'
+              type: "success",
+              message: "删除成功!"
             })
             this.getList()
           })
         })
         .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消删除'
+            type: "info",
+            message: "已取消删除"
           })
         })
     },

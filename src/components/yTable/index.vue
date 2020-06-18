@@ -39,15 +39,15 @@ export default {
   methods: {
     changePage(page) {
       this.pagination.pageNumber = page
-      this.$emit('changePage4List')
+      this.$emit("changePage4List")
     },
     changePageSize(val) {
       this.pagination.pageSize = val
-      this.$emit('changePage4List')
+      this.$emit("changePage4List")
     },
     setPaginationDefault() {
       if (!this.pagination.layout) {
-        this.pagination.layout = 'total, prev, pager, next, jumper, sizes'
+        this.pagination.layout = "total, prev, pager, next, jumper, sizes"
       }
       if (!this.pagination.pageSizes) {
         this.pagination.pageSizes = [10, 20, 30, 40, 50]
@@ -55,14 +55,15 @@ export default {
     },
     tableHeaderColor({ row, column, rowIndex, columnIndex }) {
       if (rowIndex === 0) {
-        return 'color: rgb(245, 245,245);font-weight: 300;height:20px'
+        return "color: rgb(245, 245,245);font-weight: 300;height:20px"
       }
+      return ""
     },
     changeSort(e) {
       // e.order 的值 null,ascending,descending
       const map = new Map([
-        ['descending', '1'],
-        ['ascending', '0']])
+        ["descending", "1"],
+        ["ascending", "0"]])
       const desc = map.get(e.order)
       const sort = {}
       if (desc) {
@@ -70,7 +71,7 @@ export default {
         sort.desc = desc
       }
 
-      this.$emit('sortBy', sort)
+      this.$emit("sortBy", sort)
     }
   }
 }

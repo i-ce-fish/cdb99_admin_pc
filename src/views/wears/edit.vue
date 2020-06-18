@@ -60,7 +60,7 @@
 
 <script>
 
-import { putWear, getWear } from '../../api/wear'
+import { putWear, getWear } from "../../api/wear"
 
 export default {
 
@@ -81,11 +81,11 @@ export default {
 
     async api() {
       const res = await putWear(this.$route.query.id, this.wearForm)
-      this.$router.push({ path: '/wears' })
+      this.$router.push({ path: "/wears" })
 
       this.$message({
-        message: '添加成功',
-        type: 'success'
+        message: "添加成功",
+        type: "success"
       })
     },
 

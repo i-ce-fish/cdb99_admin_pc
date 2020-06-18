@@ -153,7 +153,7 @@
 
 <script>
 
-import { putCustomer, getCustomer } from '../../api/customer'
+import { putCustomer, getCustomer } from "../../api/customer"
 
 export default {
 
@@ -174,11 +174,11 @@ export default {
 
     async api() {
       const res = await putCustomer(this.$route.query.id, this.customerForm)
-      this.$router.push({ path: '/customers' })
+      this.$router.push({ path: "/customers" })
 
       this.$message({
-        message: '添加成功',
-        type: 'success'
+        message: "添加成功",
+        type: "success"
       })
     },
 

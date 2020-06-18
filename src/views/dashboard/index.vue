@@ -36,13 +36,13 @@
 </template>
 
 <script>
-import Tinymce from '@/components/Tinymce/tinymce'
+import Tinymce from "@/components/Tinymce/tinymce"
 
 export default {
   components: { Tinymce },
   data() {
     return {
-      content: ''
+      content: ""
     }
   }
 }

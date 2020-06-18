@@ -113,7 +113,7 @@
 
 <script>
 
-import { addOrder } from '../../api/order'
+import { addOrder } from "../../api/order"
 
 export default {
 
@@ -127,11 +127,11 @@ export default {
 
     async api() {
       const res = await addOrder(this.orderForm)
-      this.$router.push({ path: '/orders' })
+      this.$router.push({ path: "/orders" })
 
       this.$message({
-        message: '添加成功',
-        type: 'success'
+        message: "添加成功",
+        type: "success"
       })
     },
 

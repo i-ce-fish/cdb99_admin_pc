@@ -14,8 +14,8 @@ export default {
           require: false,
           default: () =>
             [
-              { value: true, label: '是' },
-              { value: false, label: '否' }
+              { value: true, label: "是" },
+              { value: false, label: "否" }
             ]
         }
   },
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     change() {
-      this.$emit('input', this.result)
+      this.$emit("input", this.result)
     }
   }
 }

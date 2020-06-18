@@ -1,21 +1,21 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from "vue"
+import Router from "vue-router"
 
 Vue.use(Router)
 
 /* Layout */
-import Layout from '@/layout'
-import productsRouter from '@/router/products'
-import categoriesRouter from './categories'
-import activitiesRouter from './activities'
-import ordersRouter from './orders'
-import usersRouter from './user'
-import customersRouter from './customer'
-import wearsRouter from './wears'
-import outfitsRouter from './outfits'
-import articlesRouter from './articles'
-import catalogsRouter from './catalogs'
-import goodsRouter from './goods'
+import Layout from "@/layout"
+import productsRouter from "./modules/products"
+import categoriesRouter from "./modules/categories"
+import activitiesRouter from "./modules/activities"
+import ordersRouter from "./modules/orders"
+import usersRouter from "./modules/user"
+import customersRouter from "./modules/customer"
+import wearsRouter from "./modules/wears"
+import outfitsRouter from "./modules/outfits"
+import articlesRouter from "./modules/articles"
+import catalogsRouter from "./modules/catalogs"
+import goodsRouter from "./modules/goods"
 // import inventoriesRouter from '@/router/inventories'
 // import productsRouter from '@/router/products'
 // import sales_ordersRouter from '@/router/sales_orders'
@@ -50,31 +50,31 @@ import goodsRouter from './goods'
  */
 export const constantRoutes = [
   {
-    path: '/test',
-    component: () => import('@/views/test/index'),
+    path: "/test",
+    component: () => import("@/views/test/index"),
     hidden: true
   },
   {
-    path: '/login',
-    component: () => import('@/views/login/index'),
-    hidden: true
-  },
-
-  {
-    path: '/404',
-    component: () => import('@/views/404'),
+    path: "/login",
+    component: () => import("@/views/login/index"),
     hidden: true
   },
 
   {
-    path: '/',
+    path: "/404",
+    component: () => import("@/views/404"),
+    hidden: true
+  },
+
+  {
+    path: "/",
     component: Layout,
-    redirect: '/dashboard',
+    redirect: "/dashboard",
     children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'dashboard' }
+      path: "dashboard",
+      name: "Dashboard",
+      component: () => import("@/views/dashboard/index"),
+      meta: { title: "首页", icon: "dashboard" }
     }]
   },
   // catalogsRouter,
@@ -120,7 +120,7 @@ export const constantRoutes = [
   // },
 
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  { path: "*", redirect: "/404", hidden: true }
 ]
 
 const createRouter = () => new Router({

@@ -47,7 +47,7 @@ export default {
       }
     },
     change() {
-      this.$emit('input', this.result.toString())
+      this.$emit("input", this.result.toString())
     }
   }
 }

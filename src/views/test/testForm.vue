@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { addCompany } from '@/api/company'
+import { addCompany } from "@/api/company"
 export default {
   components: {},
   props: { form: Object },
@@ -42,49 +42,49 @@ export default {
         name: [
           {
             required: true,
-            message: '请输入姓名',
-            trigger: 'blur'
+            message: "请输入姓名",
+            trigger: "blur"
           }
         ],
         companyname: [
           {
             required: true,
-            message: '请输入用户名',
-            trigger: 'blur'
+            message: "请输入用户名",
+            trigger: "blur"
           }
         ],
         email: [
           {
             required: true,
-            trigger: 'blur',
-            message: '请输入邮箱'
+            trigger: "blur",
+            message: "请输入邮箱"
           },
           {
             pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/,
-            message: '请输入正确邮箱格式'
+            message: "请输入正确邮箱格式"
           }
         ],
         phone: [
           {
             required: true,
-            message: '请输入手机号码',
-            trigger: 'blur'
+            message: "请输入手机号码",
+            trigger: "blur"
           },
           {
             pattern: /^1[3456789]\d{9}/,
-            message: '请输入正确的手机号码',
-            trigger: 'blur'
+            message: "请输入正确的手机号码",
+            trigger: "blur"
           }
         ], address: [
           {
             required: true,
-            message: '请输 号码',
-            trigger: 'blur'
+            message: "请输 号码",
+            trigger: "blur"
           },
           {
             pattern: /^1[3456789]\d{9}/,
-            message: '请输入正确 号码',
-            trigger: 'blur'
+            message: "请输入正确 号码",
+            trigger: "blur"
           }
         ]
       }
@@ -108,10 +108,10 @@ export default {
       this.$refs.companyForm.validate(valid => {
         if (valid) {
           this.api()
-          this.$emit('submit')
+          this.$emit("submit")
           this.$message({
-            message: '添加成功',
-            type: 'success'
+            message: "添加成功",
+            type: "success"
           })
         } else {
           return false
@@ -119,7 +119,7 @@ export default {
       })
     },
     back() {
-      this.$router.push({ path: '/management/companies' })
+      this.$router.push({ path: "/management/companies" })
     }
   }
 }

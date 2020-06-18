@@ -1,19 +1,19 @@
-import Vue from 'vue'
+import Vue from "vue"
 
-import 'normalize.css/normalize.css' // A modern alternative to CSS resets
+import "normalize.css/normalize.css" // A modern alternative to CSS resets
 
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import ElementUI from "element-ui"
+import "element-ui/lib/theme-chalk/index.css"
 // import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
-import '@/styles/index.scss' // global css
+import "@/styles/index.scss" // global css
 
-import App from './App'
-import store from './store'
-import router from './router'
+import App from "./App"
+import store from "./store"
+import router from "./router"
 
-import '@/icons' // icon
-import '@/permission' // permission control
+import "@/icons" // icon
+import "@/permission" // permission control
 
 /**
  * If you don't want to use mock-server
@@ -30,31 +30,31 @@ import '@/permission' // permission control
 // }
 
 // 自定义组件
-import YInput from '@/components/yComponent/yInput'
-import YSelect from '@/components/yComponent/ySelect'
-import YSelectInput from '@/components/yComponent/ySelectInput'
-import YCheckbox from '@/components/yComponent/yCheckbox'
-import YDatepicker from '@/components/yComponent/yDatepicker'
-import YNumber from '@/components/yComponent/yNumber'
-import YRadio from '@/components/yComponent/yRadio'
-import YTextarea from '@/components/yComponent/yTextarea'
-import YText from '@/components/yComponent/yText'
-import YSlider from '@/components/yComponent/ySlider'
-import YUpload from '@/components/yComponent/yUpload'
-import YSwitch from '@/components/yComponent/ySwitch'
+import YInput from "@/components/yComponent/yInput"
+import YSelect from "@/components/yComponent/ySelect"
+import YSelectInput from "@/components/yComponent/ySelectInput"
+import YCheckbox from "@/components/yComponent/yCheckbox"
+import YDatepicker from "@/components/yComponent/yDatepicker"
+import YNumber from "@/components/yComponent/yNumber"
+import YRadio from "@/components/yComponent/yRadio"
+import YTextarea from "@/components/yComponent/yTextarea"
+import YText from "@/components/yComponent/yText"
+import YSlider from "@/components/yComponent/ySlider"
+import YUpload from "@/components/yComponent/yUpload"
+import YSwitch from "@/components/yComponent/ySwitch"
 
-Vue.component('YRadio', YRadio)
-Vue.component('YInput', YInput)
-Vue.component('YSelect', YSelect)
-Vue.component('YSelectInput', YSelectInput)
-Vue.component('YCheckbox', YCheckbox)
-Vue.component('YDatepicker', YDatepicker)
-Vue.component('YNumber', YNumber)
-Vue.component('YTextarea', YTextarea)
-Vue.component('YText', YText)
-Vue.component('YSlider', YSlider)
-Vue.component('YUpload', YUpload)
-Vue.component('YSwitch', YSwitch)
+Vue.component("YRadio", YRadio)
+Vue.component("YInput", YInput)
+Vue.component("YSelect", YSelect)
+Vue.component("YSelectInput", YSelectInput)
+Vue.component("YCheckbox", YCheckbox)
+Vue.component("YDatepicker", YDatepicker)
+Vue.component("YNumber", YNumber)
+Vue.component("YTextarea", YTextarea)
+Vue.component("YText", YText)
+Vue.component("YSlider", YSlider)
+Vue.component("YUpload", YUpload)
+Vue.component("YSwitch", YSwitch)
 
 // set ElementUI lang to EN
 // Vue.use(ElementUI, { locale })
@@ -68,14 +68,13 @@ Vue.prototype.back = function() {
   history.back()
 }
 
-
-//test
+// test
 Vue.prototype.test = function(e) {
-  console.log('test',e)
+  console.log("test", e)
 }
 
 new Vue({
-  el: '#app',
+  el: "#app",
   router,
   store,
   render: h => h(App)

@@ -7,15 +7,19 @@
       type="primary"
       @click=" dialogVisible=true"
     >上传图片
+
     </el-button>
+
     <el-dialog :visible.sync="dialogVisible">
       <el-upload
+        ref="upload"
         name="file"
         :multiple="multiple"
         :file-list="fileList"
         :on-success="handleSuccess"
         :on-remove="handleRemove"
         :on-change="handleChange"
+        :before-upload="beforeUpload"
         :show-file-list="true"
         class="editor-slide-upload"
         :action="uploadUrl"
@@ -30,13 +34,12 @@
   </div>
 </template>
 <script>
-// import { getToken } from 'api/qiniu'
 
 export default {
   name: "EditorSlideUpload",
   model: {
     prop: "input",
-    event: "successCBK"
+    event: "success"
   },
   props: {
     color: {
@@ -61,62 +64,23 @@ export default {
       return Object.keys(this.listObj).every(item => this.listObj[item].hasSuccess)
     },
     handleSubmit() {
-      // const arr = Object.keys(this.listObj).map(v => this.listObj[v])
-      // if (!this.checkAllSuccess()) {
-      //   this.$message('请等待所有图片上传成功 或 出现了网络问题，请刷新页面重新上传！')
-      //   return
-      // }
-      // this.$emit('successCBK', arr)
-      // this.listObj = {}
-      // this.fileList = []
-      console.log(this.result)
-      this.$emit("successCBK", this.result)
+      this.$emit("success", this.result)
       this.dialogVisible = false
     },
     handleSuccess(response, file) {
-      // const uid = file.uid
-      // const objKeyArr = Object.keys(this.listObj)
-      // for (let i = 0, len = objKeyArr.length; i < len; i++) {
-      //   if (this.listObj[objKeyArr[i]].uid === uid) {
-      //     this.listObj[objKeyArr[i]].url = this.readFileUrl + response.data
-      //     this.listObj[objKeyArr[i]].hasSuccess = true
-      //     return
-      //   }
-      // }
-      // todo 组件优化点
-      this.result.push({ url: this.readFileUrl + response.data })
+      if (this.multiple) {
+        this.result.push({ url: this.readFileUrl + response.data })
+      } else {
+        this.result = [{ url: this.readFileUrl + response.data }]
+      }
+      this.fileList = this.result
     },
-    handleRemove(file) {
-      // const uid = file.uid
-      // const objKeyArr = Object.keys(this.listObj)
-      // for (let i = 0, len = objKeyArr.length; i < len; i++) {
-      //   if (this.listObj[objKeyArr[i]].uid === uid) {
-      //     delete this.listObj[objKeyArr[i]]
-      //     return
-      //   }
-      // }
-      this.result = ""
+    handleRemove(file, fileList) {
+      this.result = fileList
     },
     beforeUpload(file) {
-      // const _self = this
-      // const _URL = window.URL || window.webkitURL
-      // const fileName = file.uid
-      // this.listObj[fileName] = {}
-      // return new Promise((resolve, reject) => {
-      //   const img = new Image()
-      //   img.src = _URL.createObjectURL(file)
-      //   img.onload = function() {
-      //     _self.listObj[fileName] = { hasSuccess: false, uid: file.uid, width: this.width, height: this.height }
-      //   }
-      //   resolve(true)
-      // })
     },
-
-    // todo 组件优化点
-    //  上传多张图片
     handleChange(file, fileList) {
-      // console.log(fileList)
-      // this.fileList = fileList
     }
   }
 }

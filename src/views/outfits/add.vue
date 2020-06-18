@@ -38,7 +38,6 @@
             </el-form-item>
           </el-col>
 
-
           <el-col :span="24">
             <el-form-item>
               <el-button @click="submit('outfitForm')">提交</el-button>
@@ -54,7 +53,7 @@
 
 <script>
 
-import { addOutfit } from '../../api/outfit'
+import { addOutfit } from "../../api/outfit"
 
 export default {
 
@@ -68,11 +67,11 @@ export default {
 
     async api() {
       const res = await addOutfit(this.outfitForm)
-      this.$router.push({ path: '/outfits' })
+      this.$router.push({ path: "/outfits" })
 
       this.$message({
-        message: '添加成功',
-        type: 'success'
+        message: "添加成功",
+        type: "success"
       })
     },
 

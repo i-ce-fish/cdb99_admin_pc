@@ -89,7 +89,7 @@
 
 <script>
 
-import { getProduct, putProduct } from '../../api/product'
+import { getProduct, putProduct } from "../../api/product"
 
 export default {
 
@@ -116,11 +116,11 @@ export default {
 
     async api() {
       const res = await putProduct(this.$route.query.id, this.productForm)
-      this.$router.push({ path: '/products' })
+      this.$router.push({ path: "/products" })
 
       this.$message({
-        message: '修改成功',
-        type: 'success'
+        message: "修改成功",
+        type: "success"
       })
     },
 

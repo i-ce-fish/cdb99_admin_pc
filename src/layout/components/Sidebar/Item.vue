@@ -1,19 +1,19 @@
 <script>
 export default {
-  name: 'MenuItem',
+  name: "MenuItem",
   functional: true,
   props: {
     suffixicon: {
       type: String,
-      default: ''
+      default: ""
     },
     icon: {
       type: String,
-      default: ''
+      default: ""
     },
     title: {
       type: String,
-      default: ''
+      default: ""
     }
   },
   render(h, context) {

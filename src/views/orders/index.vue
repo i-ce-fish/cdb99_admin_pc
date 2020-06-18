@@ -35,8 +35,8 @@
   </div>
 </template>
 <script>
-import { getOrders, delOrder } from '@/api/order'
-import yTable from '@/components/yTable'
+import { getOrders, delOrder } from "@/api/order"
+import yTable from "@/components/yTable"
 
 export default {
   components: { yTable },
@@ -63,30 +63,30 @@ export default {
     },
 
     add() {
-      this.$router.push({ path: 'add' })
+      this.$router.push({ path: "add" })
     },
     detail(id) {
-      this.$router.push({ path: 'detail', query: { id: id }})
+      this.$router.push({ path: "detail", query: { id: id }})
     },
     del(id) {
-      this.$confirm('是否删除?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      this.$confirm("是否删除?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
       })
         .then(() => {
           delOrder(id).then(response => {
             this.$message({
-              type: 'success',
-              message: '删除成功!'
+              type: "success",
+              message: "删除成功!"
             })
             this.getList()
           })
         })
         .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消删除'
+            type: "info",
+            message: "已取消删除"
           })
         })
     }

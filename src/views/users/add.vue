@@ -94,7 +94,7 @@
 
 <script>
 
-import { addUser } from '../../api/user'
+import { addUser } from "../../api/user"
 
 export default {
 
@@ -104,19 +104,19 @@ export default {
       rules: {},
       avatarOptions: [
         {
-          value: '0',
-          label: '男',
-          url: 'http://dingyue.ws.126.net/2020/0308/873f5f66j00q6u73h001bd200u000k0g009c0068.jpg'
+          value: "0",
+          label: "男",
+          url: "http://dingyue.ws.126.net/2020/0308/873f5f66j00q6u73h001bd200u000k0g009c0068.jpg"
         },
         {
-          value: '1',
-          label: '女',
-          url: 'http://pic.51yuansu.com/pic3/cover/00/82/39/58c86eac2ef89_610.jpg'
+          value: "1",
+          label: "女",
+          url: "http://pic.51yuansu.com/pic3/cover/00/82/39/58c86eac2ef89_610.jpg"
         }],
       roleOptions: [
-        { value: '0', label: '管理员' },
+        { value: "0", label: "管理员" },
         {
-          value: '1', label: '普通用户'
+          value: "1", label: "普通用户"
         }
       ]
     }
@@ -125,11 +125,11 @@ export default {
 
     async api() {
       const res = await addUser(this.userForm)
-      this.$router.push({ path: '/users' })
+      this.$router.push({ path: "/users" })
 
       this.$message({
-        message: '添加成功',
-        type: 'success'
+        message: "添加成功",
+        type: "success"
       })
     },
 
