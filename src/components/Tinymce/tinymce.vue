@@ -1,231 +1,94 @@
 <template>
-  <div :class="{fullscreen:fullscreen}" class="tinymce-container editor-container">
-    <textarea :id="tinymceId" class="tinymce-textarea" />
-
-    <div class="editor-custom-btn-container">
-      <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK" />
-    </div>
+  <div class="tinymce-box">
+    <editor v-model="myValue"
+            :init="init"
+            :disabled="disabled"
+            @onClick="onClick">
+    </editor>
   </div>
 </template>
 
 <script>
-import editorImage from "@/components/Tinymce/editorImage"
-import plugins from "@/components/Tinymce/plugins"
-import toolbar from "@/components/Tinymce/toolbar"
-
-export default {
-  name: "Tinymce",
-  components: { editorImage },
-  props: {
-    id: {
-      type: String,
-      default: function() {
-        return "vue-tinymce-" + +new Date() + ((Math.random() * 1000).toFixed(0) + "")
+  import tinymce from 'tinymce/tinymce' //tinymce默认hidden，不引入不显示
+  import Editor from '@tinymce/tinymce-vue'
+  import 'tinymce/themes/silver'
+  // 编辑器插件plugins
+  // 更多插件参考：https://www.tiny.cloud/docs/plugins/
+  import 'tinymce/plugins/image'// 插入上传图片插件
+  import 'tinymce/plugins/media'// 插入视频插件
+  import 'tinymce/plugins/table'// 插入表格插件
+  import 'tinymce/plugins/lists'// 列表插件
+  import 'tinymce/plugins/wordcount'// 字数统计插件
+  export default {
+    components:{
+      Editor
+    },
+    name:'tinymce',
+    props: {
+      value: {
+        type: String,
+        default: ''
+      },
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+      plugins: {
+        type: [String, Array],
+        default: 'lists image media table wordcount'
+      },
+      toolbar: {
+        type: [String, Array],
+        default: 'undo redo |  formatselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | lists image media table | removeformat'
       }
     },
-    value: {
-      type: String,
-      default: ""
-    },
-    toolbar: {
-      type: Array,
-      required: false,
-      default() {
-        return []
-      }
-    },
-    // 菜单栏
-    menubar: {
-      type: String,
-      // default: 'file edit insert view format table'
-      default: ""
-    },
-    height: {
-      type: Number,
-      required: false,
-      default: 720
-    }
-  },
-  data() {
-    return {
-      val: "",
-      hasChange: false,
-      hasInit: false,
-      tinymceId: this.id,
-      fullscreen: false,
-      languageTypeList: {
-        "en": "en",
-        "zh": "zh_CN"
-      }
-    }
-  },
-  computed: {
-    language() {
-      // return this.languageTypeList[this.$store.getters.language]
-      return "zh_CN"
-    }
-  },
-  watch: {
-    value(val) {
-      if (this.val != this.value) {
-        if (this.hasInit) {
-          this.$nextTick(() =>
-            this.setContent(val || ""))
-        }
-      }
-      // let con = this.getContent();
-      // console.log(con,val)
-      // if (!this.hasChange && this.hasInit) {
-      //   this.$nextTick(() =>
-      //     this.setContent(val || ''))
-      // }
-    },
-    val() {
-      this.$emit("input", this.val)
-    },
-    language() {
-      this.destroyTinymce()
-      this.$nextTick(() => this.initTinymce())
-    }
-  },
-  mounted() {
-    this.initTinymce()
-  },
-  activated() {
-    this.initTinymce()
-  },
-  deactivated() {
-    this.destroyTinymce()
-  },
-  destroyed() {
-    this.destroyTinymce()
-  },
-  methods: {
-    initTinymce() {
-      const _this = this
-      window.tinymce.init({
-        language: this.language,
-        selector: `#${this.tinymceId}`,
-        height: this.height,
-        body_class: "panel-body ",
-        object_resizing: false,
-        toolbar: this.toolbar.length > 0 ? this.toolbar : toolbar,
-        menubar: this.menubar,
-        plugins: plugins,
-        end_container_on_empty_block: true,
-        powerpaste_word_import: "clean",
-        code_dialog_height: 450,
-        code_dialog_width: 1000,
-        advlist_bullet_styles: "square",
-        advlist_number_styles: "default",
-        imagetools_cors_hosts: ["www.tinymce.com", "codepen.io"],
-        default_link_target: "_blank",
-        link_title: false,
-        nonbreaking_force_tab: true, // inserting nonbreaking space &nbsp; need Nonbreaking Space Plugin
-        init_instance_callback: editor => {
-          if (_this.value) {
-            editor.setContent(_this.val)
+    data(){
+      return{
+        init: {
+          language_url: '/tinymce/langs/zh_CN.js',
+          language: 'zh_CN',
+          skin_url: '/tinymce/skins/ui/oxide',
+          // skin_url: 'tinymce/skins/ui/oxide-dark',//暗色系
+          height: 300,
+          plugins: this.plugins,
+          toolbar: this.toolbar,
+          branding: false,
+          menubar: false,
+          // 此处为图片上传处理函数，这个直接用了base64的图片形式上传图片，
+          // 如需ajax上传可参考https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_handler
+          images_upload_handler: (blobInfo, success, failure) => {
+            const img = 'data:image/jpeg;base64,' + blobInfo.base64()
+            success(img)
           }
-          _this.hasInit = true
-          editor.on("NodeChange Change KeyUp SetContent", () => {
-            this.hasChange = true
-            this.val = editor.getContent()
-            //  this.$emit('input', editor.getContent())
-          })
         },
-        setup(editor) {
-          editor.on("FullscreenStateChanged", (e) => {
-            _this.fullscreen = e.state
-          })
-        }
-        // 整合七牛上传
-        // images_dataimg_filter(img) {
-        //   setTimeout(() => {
-        //     const $image = $(img);
-        //     $image.removeAttr('width');
-        //     $image.removeAttr('height');
-        //     if ($image[0].height && $image[0].width) {
-        //       $image.attr('data-wscntype', 'image');
-        //       $image.attr('data-wscnh', $image[0].height);
-        //       $image.attr('data-wscnw', $image[0].width);
-        //       $image.addClass('wscnph');
-        //     }
-        //   }, 0);
-        //   return img
-        // },
-        // images_upload_handler(blobInfo, success, failure, progress) {
-        //   progress(0);
-        //   const token = _this.$store.getters.token;
-        //   getToken(token).then(response => {
-        //     const url = response.data.qiniu_url;
-        //     const formData = new FormData();
-        //     formData.append('token', response.data.qiniu_token);
-        //     formData.append('key', response.data.qiniu_key);
-        //     formData.append('file', blobInfo.blob(), url);
-        //     upload(formData).then(() => {
-        //       success(url);
-        //       progress(100);
-        //     })
-        //   }).catch(err => {
-        //     failure('出现未知问题，刷新页面，或者联系程序员')
-        //     console.log(err);
-        //   });
-        // },
-      })
-    },
-    destroyTinymce() {
-      const tinymce = window.tinymce.get(this.tinymceId)
-      if (this.fullscreen) {
-        tinymce.execCommand("mceFullScreen")
-      }
-      if (tinymce) {
-        tinymce.destroy()
+        myValue: this.value
       }
     },
-    setContent(value) {
-      window.tinymce.get(this.tinymceId).setContent(value)
+    mounted () {
+      tinymce.init({})
     },
-    getContent() {
-      window.tinymce.get(this.tinymceId).getContent()
+    methods: {
+      // 添加相关的事件，可用的事件参照文档=> https://github.com/tinymce/tinymce-vue => All available events
+      // 需要什么事件可以自己增加
+      onClick (e) {
+        this.$emit('onClick', e, tinymce)
+      },
+      // 可以添加一些自己的自定义事件，如清空内容
+      clear () {
+        this.myValue = ''
+      }
     },
-    imageSuccessCBK(arr) {
-      const _this = this
-      arr.forEach(v => {
-        window.tinymce.get(_this.tinymceId).insertContent(`<img class="wscnph" src="${v.url}" >`)
-      })
+    watch: {
+      value (newValue) {
+        this.myValue = newValue
+      },
+      myValue (newValue) {
+        this.$emit('input', newValue)
+      }
     }
   }
-}
+
 </script>
-
 <style scoped>
-  .tinymce-container {
-    position: relative;
-    line-height: normal;
-  }
 
-  .tinymce-container >>> .mce-fullscreen {
-    z-index: 10000;
-  }
-
-  .tinymce-textarea {
-    visibility: hidden;
-    z-index: -1;
-  }
-
-  .editor-custom-btn-container {
-    position: absolute;
-    right: 4px;
-    top: 4px;
-    /*z-index: 2005;*/
-  }
-
-  .fullscreen .editor-custom-btn-container {
-    z-index: 10000;
-    position: fixed;
-  }
-
-  .editor-upload-btn {
-    display: inline-block;
-  }
 </style>
